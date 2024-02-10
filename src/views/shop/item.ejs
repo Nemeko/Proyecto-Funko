@@ -1,0 +1,53 @@
+<%- include('../partials/headerAdmin')%>
+    <main class="container-pagina">
+    <section class="container_item">
+        <img src="../../recursos/star-wars/baby-yoda-1.webp" alt="">
+        <div>
+            <h3>star-wars</h3>
+            <h2><%= item.product_name %></h2>
+            <p>Figura coleccionable de Baby Yoda (Grogu) - The Mandalorian Saga, edicion limitada</p>
+            <p class="item_precio">$ 1799.99</p>
+            <div>
+                <button class="boton-item">-</button>
+                <input class="item_input" type="text" placeholder="0">
+                <button class="boton-item" >+</button>
+                <button class="boton-standar margin-left">Agregar al Carrito</button>
+            </div>
+            <div class="item_metodosPago">
+                <a href="">Ver metodos de pago</a>
+                <p>- 3 CUOTAS SIN INTERÉS</p>
+            </div>
+        </div>
+    </section>
+    <h2 class="titulo_pag centrar-izquierda" >Productos relacionados</h2>
+    <section class="container_tarjetas">
+        <div class="tarjetas">
+            <img src="../../recursos/star-wars/trooper-1.webp" alt="">
+            <div>
+                <h6 class="tarjetas_categoria" >STAR WARS</h6>
+                <h5 class="tarjetas_titulo" >STORMTROOPER LIGHTSABER</h5>
+                <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+                <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+            </div>
+        </div>
+        <div class="tarjetas">
+            <img src="../../recursos/pokemon/pidgeotto-1.webp" alt="">
+            <div>
+                <h6 class="tarjetas_categoria" >POKEMON</h6>
+                <h5 class="tarjetas_titulo" >PIDGEOTTO</h5>
+                <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+                <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+            </div>
+        </div>
+        <div class="tarjetas">
+            <img src="../../recursos/harry-potter/luna-1.webp" alt="">
+            <div>
+                <h6 class="tarjetas_categoria" >HARRY POTTER</h6>
+                <h5 class="tarjetas_titulo" >LUNA LOVEGOOD LION MASK</h5>
+                <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+                <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+            </div>
+        </div>
+    </section>
+</main>
+<%- include('../partials/footer')%>

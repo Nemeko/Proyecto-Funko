@@ -1,0 +1,48 @@
+
+<%- include('../partials/header')%>
+
+    <main class="container-pagina">  <!-- class="container-1600" -->
+        <section class="buscador">
+            <svg class="buscador_icono" role="img">
+                <use class="icon_search" xlink:href="/icons/icons.svg#search" alt="lupa"></use>
+            </svg>
+            <input class="buscador_input" type="text" placeholder="codigo, nombre o categoria">
+        </section>
+        <section class="list_cabecera">
+                <h2 class="titulo_pag">LISTADO DE PRODUCTOS</h2>
+                <a class="list_cabecera_link" href="/admin/create">
+                    <p class="list_cabecera_agregar">AGREGAR</p>
+                    <p class="list_cabecera_mas">+</p>
+                </a>
+        </section>
+        <section class="list_container">
+                <ul>
+                    <li class="list_item_cabecera">
+                        <p>ID</p>
+                        <p>Codigo</p>
+                        <p>Nombre del Producto</p>
+                        <p>Categoria</p>           
+                    </li>
+                    <% items.forEach(item => { %>
+                    <li class="list_item">
+                        <p class="list_id"><%= item.product_id %></p>
+                        <p class="list_codigo"><%= item.sku %></p>
+                        <p class="list_nombre"><%= item.product_name %></p>
+                        <p class="list_categoria">Falta editar categoria<p> 
+                        <div class="list_div_icono">          
+                            <a href="/admin/edit/<%= item.product_id %>">
+                                <svg class="icono icono_lapiz" role="img">  
+                                    <use xlink:href="/icons/icons.svg#pencil" alt="lapiz"></use>     
+                                </svg>
+                            </a>
+                            <svg class="icono icono_papelera" role="img">
+                                <use xlink:href="/icons/icons.svg#trash" alt="papelera"></use>
+                            </svg>
+                        </div>
+                    </li>
+                    <% }) %>
+                </ul>
+        </section>
+    </main>
+    
+<%- include('../partials/footer')%>

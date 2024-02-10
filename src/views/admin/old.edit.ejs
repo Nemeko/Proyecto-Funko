@@ -1,0 +1,64 @@
+<%- include('../partials/header')%>
+    <main class="container-pagina">
+        <h2 class="titulo_pag">EDITAR ITEM</h2>
+        <form action="">
+            <div class="container-opciones">
+                <div>
+                    <label for="categoria">Categoría:</label>
+                    <select name="" id="categoria">
+                        <option value="" disabled hidden selected>-- Seleccionar --</option>
+                        
+                        <!-- hacer logica if para que seleccione-->
+
+                        <option value="Pokemon">Pokemon</option> 
+                        <option value="Star Wars">Star Wars</option>               
+                        <option value="Harry Potter">Harry Potter</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="licencia">Licencia:</label>
+                    <select autocomplete="off" name="" id="licencia">
+                        <option value="" disabled hidden selected>-- Seleccionar --</option>
+                        <option value="">Opcion1</option>
+                        <option value="">Opcion2</option>
+                        <option value="">Opcion3</option>
+                        <option value="">Opcion4</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="producto">Nombre del producto:</label>
+                <input class="size-nombre" placeholder="Nombre" type="text" name="" id="producto" value="<%= item.product_name %>">
+            </div>
+            <textarea name="" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
+            <div>
+                <label for="sku">SKU:</label>
+                <input class="size-sku" placeholder="SSKK111AB001" type="text" name="" id="sku" value="<%= item.sku %>">
+                <label for="precio">Precio:</label>
+                <input class="size-precio" placeholder="0000.00" type="text" name="" id="precio" value="<%= item.price %>">
+                <label for="stock">Stock:</label>
+                <input class="size-stock" placeholder="0" type="text" name="" id="stock" value="<%= item.stock %>">
+            </div>
+            <div>
+                <label for="descuento">Descuento:</label>
+                <input class="size-descuento"  placeholder="0%" type="text" name="" id="descuento" value="<%= item.discount %>">
+                <label for="cuotas">Cuotas:</label>
+                <select name="" id="cuotas">
+                    <option value="" disabled hidden selected>-- Seleccionar --</option>
+                    <option value="3">3 Cuotas</option>
+                    <option value="6">6 Cuotas</option>
+                    <option value="12">12 Cuotas</option>
+                    <option value="24">24 Cuotas</option>
+                </select>
+            </div>
+            <div>
+                <label for="imagenes">Imágenes:</label>
+                <input class="selectorDeImagenes" type="file" name="" id="imagenes">
+            </div>
+            <div>
+                <input class="boton-standar" type="submit" value="Agregar Producto">
+                <button class="boton-standar" >Limpiar</button>
+            </div>
+        </form>    
+    </main>
+    <%- include('../partials/footer')%>

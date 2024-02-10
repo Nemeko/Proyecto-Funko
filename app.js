@@ -1,25 +1,36 @@
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override')
 require('dotenv').config();
 const PORT = process.env.PORT;
 const adminRutes = require('./src/routes/adminRutes');
+const shopRoutes = require('./src/routes/shopRutes.js')
+const mainRoutes = require('./src/routes/mainRoutes.js');
 const { notFound } = require('./src/utils/errorHandler.js');
 
 
-/* configuracion del Template Engine - EJS */
+/* define carpeta de archivos estaticos */
+app.use(express.static('public'));  //ruta para las paginas en local
 
-// app.set('view engine', 'ejs');
-// app.set('views', './src/views');
+
+/* configuracion del Template Engine - EJS */
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
 
 /* Parseo de datos recibidos por POST */
-
 app.use(express.urlencoded());
 app.use(express.json());
+
+
+/* middleware para poder utilizar los metodos PUT y DELETE */
+app.use(methodOverride('_method'));
 
 /* Rutas de aplicacion */
 
 // app.use('/', (req, res) => res.send("Funko Test"));
 // app.use('/shop', shopRutes);
+app.use('/', mainRoutes)
+app.use('/shop', shopRoutes);
 app.use('/admin', adminRutes);
 
 // app.get('/admin', (req, res)=>{

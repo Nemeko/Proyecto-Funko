@@ -1,0 +1,78 @@
+<%- include('../partials/header')%>
+    <main class="container-pagina">
+        <h2 class="titulo_pag"><%= view.title %></h2>
+        <!-- arregar esta parte hay que editar la ruta o mandar todo el comando action desde el back -->
+        <!-- Afecta a PUT edit y a POST create -->
+        <form <%= formAction %> method="POST" enctype="application/x-www-form-urlencoded">
+        <!-- <form action=""> -->
+            <div class="container-opciones">
+                <div>
+                    <label for="categoria">Licencia:</label>
+                    <select name="" id="categoria">
+                        <% if(item.licence_id == ''){ %> 
+                            <option value="" disabled hidden selected>-- Seleccionar --</option> 
+                        <% } %>    
+                        <% licence.forEach(licencia => { %>
+                            <option <% if(licencia.licence_id == item.licence_id){ %> selected <% } %> value="<%= licencia.licence_name %>"><%= licencia.licence_name %></option> 
+                        <% }) %>
+                    </select>
+                </div>
+                <div>
+                    <label for="licencia">categoría:</label>
+                    <select autocomplete="off" name="" id="licencia">
+                        <% if(item.category_id == ''){ %> 
+                            <option value="" disabled hidden selected>-- Seleccionar --</option> 
+                        <% } %> 
+                        <% category.forEach(categoria => { %>
+                            <option <% if(categoria.category_id == item.category_id){ %> selected <% } %> value="<%= categoria.category_name %>"><%= categoria.category_name %></option> 
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="producto">Nombre del producto:</label>
+                <input class="size-nombre" placeholder="Nombre" type="text" name="" id="producto" value="<%= item.product_name %>">
+            </div>
+            <textarea name="" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
+            <div>
+                <label for="sku">SKU:</label>
+                <input class="size-sku" placeholder="SSKK111AB001" type="text" name="" id="sku" value="<%= item.sku %>">
+                <label for="precio">Precio:</label>
+                <input class="size-precio" placeholder="0000.00" type="text" name="" id="precio" value="<%= item.price %>">
+                <label for="stock">Stock:</label>
+                <input class="size-stock" placeholder="0" type="text" name="" id="stock" value="<%= item.stock %>">
+            </div>
+            <div>
+                <label for="descuento">Descuento:</label>
+                <input class="size-descuento"  placeholder="0" type="text" name="" id="descuento" value="<%= item.discount %>"><spam class="porcentaje">%</spam>
+                <label for="cuotas">Cuotas:</label>
+                <select name="" id="cuotas">
+                    <option value="" disabled hidden selected>-- Seleccionar --</option>
+                    <option value="3">3 Cuotas</option>
+                    <option value="6">6 Cuotas</option>
+                    <option value="12">12 Cuotas</option>
+                    <option value="24">24 Cuotas</option>
+                </select>
+            </div>
+            <div class="flex-box" id="evnt-carga">
+                <div class="img-box">
+                    <label for="imagenes">Imágen Delantera:</label>
+                    <img class="imagen" src="" alt="">
+                    <span class="img-nombre"></span>
+                    <input class="selectorDeImagenes" type="file" name="imagenes">
+                </div>
+                <div class="img-box">
+                    <label for="imagenes">Imágen Trasera:</label>
+                    <img class="imagen" src="" alt="">             
+                    <span class="img-nombre"></span>
+                    <input class="selectorDeImagenes" type="file" name="imagenes"> 
+                </div>
+            </div>
+            <div>
+                <input class="boton-standar" type="submit" value="Agregar Producto">
+                <button class="boton-standar" >Limpiar</button>
+            </div>
+        </form>    
+    </main>
+    <script src="/js/script.js"></script>	  <!-- Script para la foto -->
+    <%- include('../partials/footer')%>
