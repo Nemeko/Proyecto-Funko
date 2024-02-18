@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
 require('dotenv').config();
 const PORT = process.env.PORT;
 const adminRutes = require('./src/routes/adminRutes');
@@ -18,12 +18,12 @@ app.set('view engine', 'ejs');
 app.set('views', './src/views');
 
 /* Parseo de datos recibidos por POST */
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 
 /* middleware para poder utilizar los metodos PUT y DELETE */
-app.use(methodOverride('_method'));
+// app.use(methodOverride('_method'));
 
 /* Rutas de aplicacion */
 
@@ -50,5 +50,4 @@ app.use('/admin', adminRutes);
 /* admin o config ? */ 
 
 app.use(notFound);                  // Manejo del error 404
-
-app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
+app.listen(PORT, () => console.log(`\n- Servidor corriendo en el puerto ${PORT}`));

@@ -114,6 +114,10 @@ footer{
     font-family: var(--alt-font);
 }
 
+
+
+
+
 a{
     text-decoration: none;
     font-family: inherit;
@@ -261,6 +265,18 @@ label,
     min-width: 13rem;
 }
 
+.boton-redondo{
+    border-radius: 30px;
+    height: auto;
+    font-size: 1em;
+}
+
+.boton-delete{
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+}
+
 .boton-standar,
 .boton-redondo{
     background-color: var(--blue-4);
@@ -271,12 +287,6 @@ label,
     /* margin: 0 var(--spacing-16); */
     font-size: var(--font-size-xs);
     min-width: 13rem;
-}
-
-.boton-redondo{
-    border-radius: 30px;
-    height: auto;
-    font-size: 1em;
 }
 
 .boton-standar:hover,
@@ -678,7 +688,10 @@ font-size: var(--font-size-xs);
 
 
 
-
+.list_div_icono{
+    /* border: 2px solid white; */
+    display: flex;
+}
 
 
 

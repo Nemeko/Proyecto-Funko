@@ -1,52 +1,49 @@
 <%- include('../partials/header')%>
     <main class="container-pagina">
         <h2 class="titulo_pag"><%= view.title %></h2>
-        <!-- arregar esta parte hay que editar la ruta o mandar todo el comando action desde el back -->
-        <!-- Afecta a PUT edit y a POST create -->
-        <form <%= formAction %> method="POST" enctype="application/x-www-form-urlencoded">
-        <!-- <form action=""> -->
+        <form action="<%= formAction %>" method="POST" enctype="multipart/form-data">
             <div class="container-opciones">
                 <div>
-                    <label for="categoria">Licencia:</label>
-                    <select name="" id="categoria">
+                    <label for="licencia">Licencia:</label>
+                    <select name="licence_id" id="licencia">
                         <% if(item.licence_id == ''){ %> 
                             <option value="" disabled hidden selected>-- Seleccionar --</option> 
                         <% } %>    
                         <% licence.forEach(licencia => { %>
-                            <option <% if(licencia.licence_id == item.licence_id){ %> selected <% } %> value="<%= licencia.licence_name %>"><%= licencia.licence_name %></option> 
+                            <option <% if(licencia.licence_id == item.licence_id){ %> selected <% } %> value="<%= licencia.licence_id %>"><%= licencia.licence_name %></option> 
                         <% }) %>
                     </select>
                 </div>
                 <div>
-                    <label for="licencia">categoría:</label>
-                    <select autocomplete="off" name="" id="licencia">
+                    <label for="categoria">categoría:</label>
+                    <select autocomplete="off" name="category_id" id="categoria">
                         <% if(item.category_id == ''){ %> 
                             <option value="" disabled hidden selected>-- Seleccionar --</option> 
                         <% } %> 
                         <% category.forEach(categoria => { %>
-                            <option <% if(categoria.category_id == item.category_id){ %> selected <% } %> value="<%= categoria.category_name %>"><%= categoria.category_name %></option> 
+                            <option <% if(categoria.category_id == item.category_id){ %> selected <% } %> value="<%= categoria.category_id %>"><%= categoria.category_name %></option> 
                         <% }) %>
                     </select>
                 </div>
             </div>
             <div>
                 <label for="producto">Nombre del producto:</label>
-                <input class="size-nombre" placeholder="Nombre" type="text" name="" id="producto" value="<%= item.product_name %>">
+                <input class="size-nombre" placeholder="Nombre" type="text" name="name" id="producto" value="<%= item.product_name %>">
             </div>
-            <textarea name="" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
+            <textarea name="description" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
             <div>
                 <label for="sku">SKU:</label>
-                <input class="size-sku" placeholder="SSKK111AB001" type="text" name="" id="sku" value="<%= item.sku %>">
+                <input class="size-sku" placeholder="SSKK111AB001" type="text" name="sku" id="sku" value="<%= item.sku %>">
                 <label for="precio">Precio:</label>
-                <input class="size-precio" placeholder="0000.00" type="text" name="" id="precio" value="<%= item.price %>">
+                <input class="size-precio" placeholder="0000.00" type="text" name="price" id="precio" value="<%= item.price %>">
                 <label for="stock">Stock:</label>
-                <input class="size-stock" placeholder="0" type="text" name="" id="stock" value="<%= item.stock %>">
+                <input class="size-stock" placeholder="0" type="text" name="stock" id="stock" value="<%= item.stock %>">
             </div>
             <div>
                 <label for="descuento">Descuento:</label>
-                <input class="size-descuento"  placeholder="0" type="text" name="" id="descuento" value="<%= item.discount %>"><spam class="porcentaje">%</spam>
+                <input class="size-descuento"  placeholder="0" type="text" name="discount" id="descuento" value="<%= item.discount %>"><spam class="porcentaje">%</spam>
                 <label for="cuotas">Cuotas:</label>
-                <select name="" id="cuotas">
+                <select name="dues" id="cuotas">
                     <option value="" disabled hidden selected>-- Seleccionar --</option>
                     <option value="3">3 Cuotas</option>
                     <option value="6">6 Cuotas</option>
@@ -57,15 +54,15 @@
             <div class="flex-box" id="evnt-carga">
                 <div class="img-box">
                     <label for="imagenes">Imágen Delantera:</label>
-                    <img class="imagen" src="" alt="">
+                    <img class="imagen" src= "<%= item.image_front %>" alt="">
                     <span class="img-nombre"></span>
-                    <input class="selectorDeImagenes" type="file" name="imagenes">
+                    <input class="selectorDeImagenes" type="file" name="imagenDelantera">
                 </div>
                 <div class="img-box">
                     <label for="imagenes">Imágen Trasera:</label>
-                    <img class="imagen" src="" alt="">             
+                    <img class="imagen" src= "<%= item.image_back %>" alt="">             
                     <span class="img-nombre"></span>
-                    <input class="selectorDeImagenes" type="file" name="imagenes"> 
+                    <input class="selectorDeImagenes" type="file" name="imagenTrasera"> 
                 </div>
             </div>
             <div>
@@ -75,4 +72,4 @@
         </form>    
     </main>
     <script src="/js/script.js"></script>	  <!-- Script para la foto -->
-    <%- include('../partials/footer')%>
+<%- include('../partials/footer')%>

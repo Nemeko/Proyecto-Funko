@@ -35,9 +35,13 @@
                                     <use xlink:href="/icons/icons.svg#pencil" alt="lapiz"></use>     
                                 </svg>
                             </a>
-                            <svg class="icono icono_papelera" role="img">
-                                <use xlink:href="/icons/icons.svg#trash" alt="papelera"></use>
-                            </svg>
+                            <form action="/admin/delete/<%= item.product_id %>" method="POST"> 
+                                <button input class="boton-delete" type="submit">
+                                    <svg class="icono icono_papelera" role="img">
+                                        <use xlink:href="/icons/icons.svg#trash" alt="papelera"></use>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
                     </li>
                     <% }) %>
