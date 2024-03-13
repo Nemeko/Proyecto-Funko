@@ -143,13 +143,13 @@ label,
 }
 
 .container-pagina{                 /* porejemplo para utilizar en main */
+    display: flex;
     max-width: 1500px;
     width: 100%;
     margin: auto;
-    display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    color: var(--ligh-1);  
+    color: var(--ligh-1); 
     /* align-items: flex-start;    agergado para el funko item */
     /* border: 2px solid white;   */
 }
@@ -561,6 +561,7 @@ font-size: var(--font-size-xs);
 .buscador_input{
     outline: none;
     border: none;
+    margin: 0px;
     margin-left: var(--spacing-28);
     border-radius: 5px;
     padding: 10px 20px;
@@ -613,7 +614,13 @@ font-size: var(--font-size-xs);
 /* titulo lista de productos */
 
 .list_container{
-    margin-top: var(--spacing-36);
+    display: flex;
+    max-width: 1390;
+    width: 100%;
+    flex-direction: column;
+    margin: var(--spacing-36) 0px;
+    /* border-bottom: 2px solid var(--dark-bg-2); */
+
 }
 
 .list_cabecera{
@@ -669,30 +676,45 @@ font-size: var(--font-size-xs);
 .list_item,
 .list_item_cabecera{
     display: grid;
-    margin: var(--spacing-12);
+    margin: 0px var(--spacing-12);
+    /* border: 2px solid black; */
     grid-auto-flow: column;
     grid-template-columns: minmax(5rem, 1fr) minmax(12rem, 1fr) minmax(30rem, 3fr) minmax(10rem, 1fr) 130px;
     gap: var(--spacing-36);
     justify-content: space-between;
     align-items: center;
     color: var(--ligh-1);
+    /* height: 60px; */
+    /* border: 2px solid yellow; */
 }
 
 .list_item_cabecera{
     font-size: var(--font-size-xxs);
     font-weight: bold;
-    margin-bottom: var(--spacing-28);
+    margin-bottom: var(--spacing-36);
+
 }
 
+.list_item{
+    background-color: var(--dark-bg-2);
+    height: 5rem;
+}
 
+.list_item:nth-child(even){
+    background-color: var(--dark-bg-3);
+}
 
-
+.list_item:last-child{
+    border-bottom: 2px solid var(--dark-bg-2);
+}
 
 .list_div_icono{
     /* border: 2px solid white; */
     display: flex;
 }
-
+.list_id{
+    margin-left: var(--spacing-8);
+}
 
 
 
@@ -968,3 +990,50 @@ input:valid + span:after {
 }
 
 */
+
+
+
+/* pagina de error */
+
+.error_titulo{
+    color: var(--red-2);
+    font-size: 64px;
+    margin: 64px 120px;
+}
+
+.error_mensaje{
+    color:white;
+    border: 1px solid var(--red-1);
+    padding: 10px;
+    margin: 0px 120px;
+    font-size: 20px;
+    height: 120px;
+}
+
+.error_contador{
+    color:white;
+    /* border: 2px solid grey; */
+    margin: 20px 120px;
+
+}
+.error_timer{
+    color: greenyellow;
+}
+
+.error_container{
+    display: flex;
+    /* border: 2px solid red; */
+    justify-content: center;
+}
+
+.error_boton{
+    margin: 32px;
+    color: var(--blue-4);
+
+}
+
+.amarillo{
+    color: yellowgreen;
+    font-weight: 800;
+    /* text-shadow: 0px 0px 5px yellowgreen; */
+}

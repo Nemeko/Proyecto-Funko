@@ -13,12 +13,15 @@ const pool = mysql.createPool({       // Creamos un pool de conexion con la conf
     queueLimit:0
 });
 
-pool.getConnection((error, connection)=>{
-       
-        (!error) ?  console.log("- La conexion a la BBDD fue exitosa"):console.log("Hubo un error en la conexion a la BBDD -> ",error);
-        connection.release();
+pool.getConnection((error, connection)=>{  
+        if(!error){
+            console.log("- La conexion a la BBDD fue exitosa")
+            connection.release();
+        }else{
+            console.log("- Hubo un error en la conexion a la BBDD:\n",error);
+            console.log("\n- Es necesario reiniciar la ejecucion manualmente")
+        }
     });
-
 
     module.exports = {
         db: pool.promise()      // Exportamos como promesa porque cuando lo llamamemos del callback espera una promesa  

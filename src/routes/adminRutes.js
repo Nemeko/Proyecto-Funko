@@ -31,6 +31,7 @@ const adminController = require('../controllers/adminController');
 
 router.get('/list', adminController.itemsList);
 router.get('/login', adminController.userLogin);
+router.get('/search', adminController.itemSearch);
 router.get('/create', adminController.itemCreateLoad);
 router.get('/edit/:id', adminController.itemEditLoad);
 router.get('/register', adminController.adminRegisterLoad);

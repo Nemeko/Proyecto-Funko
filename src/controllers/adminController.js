@@ -2,21 +2,42 @@
 /* En este controller va la logica de 'Items' y las llamadas a BBDD*/
 
 // const { getAllItem, getOneItem } = require('../models/mainModels');
+const { secureHeapUsed } = require('crypto');
 const db = require('../models/mainModels');
 const adminServices = require('../services/adminServices');
 const services = require('../services/adminServices');
+const fs = require('fs');   // Se llama para eliminar archivos del directorio
+const { on } = require('events');
+
+// console.log("dirname: ",__dirname);              //Directorio donde se ejecuta el archivo (adminController.js)
+// console.log("process.cwd: ",process.cwd());      //Directorio donde se ejecuta node (app.js)
 
 module.exports = {
-
     /* Admin list */
     itemsList : async (req, res) => {
-        const items = await db.getAllItem();
-        res.render('./admin/admin',{items});
+        try{
+            const { search } = req.query
+            console.log(`Search: ${search}`);
+            if (search){
+                items = await services.itemSearchAdmin(`%${search}%`);
+                console.log("dentro del search");
+                res.render('./admin/admin',{items})
+            }else{
+                items = await services.itemGetAll();
+                console.log("dentro del list")
+                res.render('./admin/admin',{items})
+            }
+            
+        }catch(err){
+            res.status(500).render('./error',{err})
+        }
+        // items.isError ? databaseErrorResponse : etc ;
+        // redirigir a la pag de error con un boton de volver ?
     },
+
 
     /* Item create */
     itemCreateLoad : async (req, res) => {
-        
         const category = await db.getAllCategory();
         const licence = await db.getAllLicence();
         const formAction = `/admin/create`;
@@ -55,19 +76,19 @@ module.exports = {
     },
 
     itemCreate : async(req, res) => {
-        console.log('- Controller -> itemCreate');
-        
-        let items = req.body;
+        console.log('- Controller -> itemCreate'); 
 
-        await services.createItem(items);
-        
-        items = await db.getAllItem();
-        res.render('./admin/admin',{items});
-
-        /* if boton de pagina = Agregar producto -> query set xxx from ....*/
-        /* if boton de pagina = Editar producto -> query update from ....*/
-
-        /* opcion B configurar la llamada como PUT o como POST para que vaya a un controlador distinto */
+        const item = req.body;
+        const files = Object.values(req.files);
+        files.forEach(([file]) => {               // Detectando si se cargo una nueva imagen
+            file.fieldname == 'imagenDelantera' ? item.image_front = `/img/Imagenes-Funko/${file.filename}` : item.image_back = `/img/Imagenes-Funko/${file.filename}`;
+        })
+        try{
+        await services.itemCreate(item);
+        res.redirect(`/admin/list`);
+        }catch(err){
+            res.status(500).render('./error',{err})
+        } 
     },
 
     /* Item edit */
@@ -104,30 +125,46 @@ module.exports = {
 
     itemEdit : async (req, res) => {
 
+        console.log('- Controller -> ItemEdit'); 
+
         const item = req.body;
-        console.log('req.body => ', item);
         const files = Object.values(req.files);
-        console.log('req.files => ', files);
         const id = req.params.id;
+        let {image_front, image_back} = await services.itemGetOne(id);  // trayendo las imagenes de la BBDD
+
+        files.forEach(([file]) => {                                     // Detectando si se cargo una nueva imagen
+            file.fieldname == 'imagenDelantera' ? image_front = `/img/Imagenes-Funko/${file.filename}` : image_back = `/img/Imagenes-Funko/${file.filename}`;
+        })
         
-        console.log('- Controller -> ItemEdit');    
-
-        if(files.length == 2){
-            console.log('2 Imagenes editadas')
-            item.image_front = `/img/Imagenes-Funko/${files[0][0].filename}`;
-            item.image_back = `/img/Imagenes-Funko/${files[1][0].filename}`;
-
-        } else if(files.length == 1) {
-            console.log('1 Imengen editada')
-            files[0][0].fieldname == 'imagenDelantera' ? item.image_front = `/img/Imagenes-Funko/${files[0][0].filename}` : item.image_back = `/img/Imagenes-Funko/${files[0][0].filename}`;
-            
-        }else{
-            console.log('Ninguna imagen editada');
-        }
+        Object.assign(item, {image_front:image_front},{image_back:image_back});     // asignando las variables a item
 
         await services.itemEdit(item, id);
         res.redirect(`/admin/list`);
     },
+
+    /* ItemSearch API */
+
+    itemSearch : async (req, res) => {
+        try{
+            console.log("Dentro del API search")
+            const { search } = req.query
+            console.log(`Search: ${search}`);
+            items = await services.itemSearchAdmin(`%${search}%`);
+            res.send(items)
+        }catch(err){
+            res.status(500).render('./error',{err})
+        }
+    },
+
+
+
+
+
+
+
+
+
+
 
     userLogin : async (req, res) => {
         res.render('./auth/login');
@@ -142,11 +179,27 @@ module.exports = {
         res.send('Controller -> adminRegister');
     },
 
+
+
+    /* Item delete */
     itemDelete : async (req, res) => {
-        const id = req.params.id;
-        console.log("Deleteando: ", id);
-        
-        await services.itemDelete({product_id: id})
+        const id = req.params.id;      
+        const item = await adminServices.itemGetOne(id);        // Obteniendo info del item
+
+        console.log("Deleteando: ",item);
+
+        if(item.image_front){
+            fs.unlink(process.cwd()+'/public'+item.image_front, (err) => {  // Funcion para deletear del disco
+                if(err) throw err;
+            });
+        }
+        if(item.image_back){
+            fs.unlink(process.cwd()+'/public'+item.image_back, (err) => {  // Funcion para deletear del disco
+                    if(err) throw err;
+            });
+        }
+
+        await services.itemDelete({product_id: id})     // Servicio para deletear de la BBDD
         res.redirect(`/admin/list`);
     }
 

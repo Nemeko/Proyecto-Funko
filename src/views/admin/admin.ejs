@@ -16,19 +16,19 @@
                 </a>
         </section>
         <section class="list_container">
-                <ul>
-                    <li class="list_item_cabecera">
-                        <p>ID</p>
+                <div class="list_item_cabecera">
+                        <p class="list_id" >ID</p>
                         <p>Codigo</p>
                         <p>Nombre del Producto</p>
                         <p>Categoria</p>           
-                    </li>
+                </div>
+                <ul class="list_container_ul">
                     <% items.forEach(item => { %>
                     <li class="list_item">
                         <p class="list_id"><%= item.product_id %></p>
                         <p class="list_codigo"><%= item.sku %></p>
                         <p class="list_nombre"><%= item.product_name %></p>
-                        <p class="list_categoria">Falta editar categoria<p> 
+                        <p class="list_categoria"><%= item.category_name %></p> 
                         <div class="list_div_icono">          
                             <a href="/admin/edit/<%= item.product_id %>">
                                 <svg class="icono icono_lapiz" role="img">  
@@ -48,5 +48,5 @@
                 </ul>
         </section>
     </main>
-    
+    <script src="/js/buscador.js"></script>	  <!-- Script para el buscador -->
 <%- include('../partials/footer')%>
