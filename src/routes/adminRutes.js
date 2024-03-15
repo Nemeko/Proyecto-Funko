@@ -23,10 +23,6 @@ const imageControl = require('../middlewares/imageControl');
 //     {name:'imagenTrasera', maxCount:1}
 // ]);
 
-
-
-
-
 const adminController = require('../controllers/adminController');
 
 router.get('/list', adminController.itemsList);

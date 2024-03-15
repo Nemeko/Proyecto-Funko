@@ -1,0 +1,28 @@
+
+header{
+    color: var(--ligh-1);
+    font-family: var(--alt-font);
+}
+
+.header{
+    background-color: var(--dark-bg-4);
+    padding: 0 var(--spacing-68);
+    min-width: 650px;
+}
+
+.header .header_nav{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 128px;
+}
+
+.header .header_nav .header_logo:hover{
+    transform: translateY(-5px);
+}
+
+.header .header_nav .header_link:hover{
+    transform: translateY(-3px);
+    color: var(--red-3);
+}

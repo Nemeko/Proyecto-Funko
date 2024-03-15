@@ -1,0 +1,62 @@
+<%- include('../partials/header')%>
+    <main class="container-pagina container_tienda">
+        <aside class="container_aside">
+            <div class="filter_buscador">
+                <h2 class="filter_titulo" >BUSCAR</h2>
+                <input class="buscador_input filter_buscador_size" type="text" placeholder="item o categoria">
+            </div>
+            <div class="filter_buscador">
+                <h2 class="filter_titulo" >ORDENAR POR</h2>
+                <select  name="" id="">
+                    <option value="">Mayor a Menor</option>
+                    <option value="">Menor a Mayor</option>
+                </select>
+            </div>
+            <div class="filter_buscador" >
+                <h2 class="filter_titulo" >PRECIO</h2>
+                <div class="filter_precio">
+                    <label for="precio_min">MIN</label>
+                    <input class="size_precio" type="text" name="" id="precio_min" placeholder="0.0">
+                    <p>-</p>
+                    <label for="precio_max">MAX</label>
+                    <input class="size_precio" type="text" name="" id="precio_max" placeholder="0.0">
+                </div>
+            </div>
+            <div class="filter_buscador">
+                <h2 class="filter_titulo" >FILTRAR</h2>
+                <div>
+                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_nuevos"></input>
+                    <label for="filtro_nuevos">NUEVOS</label>
+                </div>
+                <div>
+                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_ofertas"></input>
+                    <label for="filtro_ofertas">OFERTAS</label>
+                </div>
+                <div>
+                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_edicionEspecial"></input>
+                    <label for="filtro_edicionEspecial">EDICION ESPECIAL</label>
+                </div>
+                <div>
+                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_favoritos"></input>
+                    <label for="filtro_favoritos">FAVORITOS</label>
+                </div>
+            </div>
+        </aside> 
+        <section class="container_tarjetas">
+            <% items.forEach( item => { %>
+            <div>
+                <a class="tarjetas" href="/shop/item/<%= item.product_id %>"">
+                    <img src='<%=item.image_front%>' alt="">
+                    <div>
+                        <h6 class="tarjetas_categoria" ><%= item.categoria %></h6>
+                        <h5 class="tarjetas_titulo" ><%= item.product_name %></h5>
+                        <h6 class="tarjetas_precio"><%= item.price %></h6>
+                        <h6 class="tarjetas_cuotas" ><%= item.dues %> Cuotas</h6>
+                    </div>
+                </a>
+            </div>
+            <% }) %>
+            <!-- fin de iteraccion -->
+        </section>
+    </main>
+<%- include('../partials/footer')%>

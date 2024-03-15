@@ -1,0 +1,163 @@
+.container_contenido,
+.container-opciones,
+.container-pagina,
+.container_filter,
+.container_item,
+.list_container,    /* cambiar a container_list */
+.sub-container,     /* cambiar a container_sub */
+.container_tarjetas{
+    display: flex;
+}
+
+.container-pagina{  /* home, admin */
+    max-width: 1500px;
+    width: 100%;
+    margin: auto;
+    flex-flow: column nowrap;
+    align-items: center;
+    color: var(--ligh-1); 
+}
+
+.list_container{
+    /* max-width: 1390; */
+    max-width: 1500px;
+    
+    width: 100%;
+    flex-direction: column;
+    margin: var(--spacing-36) 0px;
+}
+
+
+.sub-container{
+    width: 450px;
+    height: 50px;
+    margin: var(--spacing-16);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container_filter{
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    margin-top: var(--spacing-28);
+    justify-content: center;
+    min-width: 20rem;
+}
+
+.container_item{
+    flex-flow: row wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.container-opciones{
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container_tarjetas{
+    height: auto;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.container_contenido{
+    max-width: 1200px; 
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem auto;
+}
+
+.container-header-footer{                 /* porejemplo para utilizar en main */
+    max-width: 1600px;
+    margin: auto;
+}
+
+.container_tienda{
+    flex-direction: row;
+}
+
+.container_aside{
+    flex-direction: row;
+    align-items: flex-start;
+    width: 30rem;
+    /* border: 2px solid red; */
+    align-self: flex-start;
+    position: sticky;
+    top: 0px;
+
+}
+
+.container_aside select{
+    margin: auto;
+    width: 24rem;
+    border: none;
+
+}
+
+.container-center{
+    margin: var(--spacing-68) auto;
+    justify-content: space-around;
+}
+
+.conteiner-registrarse{
+    margin-top: var(--spacing-68);
+    width: 450px;
+}
+
+.container_filter h2{
+    width: 100%;
+}
+
+.container_item h3{
+    font-size: var(--font-size-s);
+    font-weight: 500;
+}
+
+.container_item h2{
+    font-size: var(--font-size-l);
+    margin: var(--spacing-12) 0px;
+}
+
+.sub-container input:not(:placeholder-shown){
+    border-bottom: 2px solid var(--green-3);           /* modificar con validacion */
+    /* border-bottom: 2px solid var(--red-3); */
+}
+
+.sub-container input::placeholder{
+    color: var(--dark-2);
+}
+
+.container_contenido:nth-child(even){
+    flex-direction: row-reverse;
+}
+
+.container_contenido div{
+    font-size: var(--font-size-m);
+    margin: 10rem;
+}
+
+.container_contenido h2{
+    font-weight: 500;
+}
+
+.container_contenido h5{
+    /* font-size: var(--font-size-xxs); */
+    /* background-color: #004830; */
+    font-weight: 300;
+    margin: var(--spacing-12) 0px;
+}
+
+.container_contenido hr{
+    color: var(--blue-4);
+    margin: var(--spacing-16) 0px var(--spacing-28);
+}
+ 
+.container-pagina .titulo_pag{
+    margin-right: auto;
+    font-size: var(--font-size-xl);
+}
+
