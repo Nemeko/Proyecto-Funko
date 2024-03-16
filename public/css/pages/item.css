@@ -1,0 +1,21 @@
+
+.image_front{
+    display: block ;
+    width: 90%;
+}
+.image_back{
+    display: none;
+    width: 90%;
+}
+
+.container_item_image{
+    min-width: 25%;
+}
+
+.container_item_image:hover .image_front{
+    display: none;
+}
+
+.container_item_image:hover .image_back{
+    display: block;
+}

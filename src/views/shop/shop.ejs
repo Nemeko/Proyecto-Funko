@@ -42,20 +42,24 @@
                 </div>
             </div>
         </aside> 
-        <section class="container_tarjetas">
-            <% items.forEach( item => { %>
-            <div>
-                <a class="tarjetas" href="/shop/item/<%= item.product_id %>"">
-                    <img src='<%=item.image_front%>' alt="">
-                    <div>
-                        <h6 class="tarjetas_categoria" ><%= item.categoria %></h6>
-                        <h5 class="tarjetas_titulo" ><%= item.product_name %></h5>
-                        <h6 class="tarjetas_precio"><%= item.price %></h6>
-                        <h6 class="tarjetas_cuotas" ><%= item.dues %> Cuotas</h6>
-                    </div>
-                </a>
-            </div>
-            <% }) %>
+        <section>
+            <ul class="item_container">
+                <% items.forEach( item => { %>
+                <li class="item_container_card">
+                    <a class="item_container_card_link" href="/shop/item/<%= item.product_id %>"">
+                        <img class="item_container_img" src='<%=item.image_front%>' alt="">
+                        <div class="item_container_card_info">
+                            <h6 class="item_categoria" ><%= item.licence_name %></h6>
+                            <h5 class="item_titulo" ><%= item.product_name %></h5>
+                            <h6 class="item_precio"><%= item.price %></h6>
+                            <% if (item.dues){ %>
+                            <h6 class="item_cuotas" ><%= item.dues %> Cuotas</h6>
+                            <% } %>
+                        </div>
+                    </a>
+                </li>
+                <% }) %>
+            </ul>
             <!-- fin de iteraccion -->
         </section>
     </main>

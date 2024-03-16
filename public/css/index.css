@@ -12,7 +12,9 @@
 
 /* pages */
 @import url('./pages/home.css');
-@import url('./pages/admin.css');
+/* @import url('./pages/admin.css'); */
+@import url('./pages/item.css');
+@import url('./pages/shop.css');
 
 
 *,
@@ -59,7 +61,7 @@ label,
 
 
 
-.item_precio{
+.old_item_precio{                       /* se utiliza en items */
     margin: var(--spacing-16) 0px;
     font-size: var(--font-size-l);
     font-weight: 400;

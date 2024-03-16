@@ -1,24 +1,29 @@
-<%- include('../partials/headerAdmin')%>
+<%- include('../partials/header')%>
     <main class="container-pagina">
     <section class="container_item">
-        <img src="../../recursos/star-wars/baby-yoda-1.webp" alt="">
+        <div class="container_item_image">
+            <img class="image_front" src="<%= item.image_front %>" alt="">
+            <img class="image_back" src="<%= item.image_back %>" alt="">
+        </div>
         <div>
-            <h3>star-wars</h3>
-            <h2><%= item.product_name %></h2>
-            <p>Figura coleccionable de Baby Yoda (Grogu) - The Mandalorian Saga, edicion limitada</p>
-            <p class="item_precio">$ 1799.99</p>
+            <h3><%= item.licence_name %></h3>
+            <p><%= item.product_description %></p>
+            <p class="item_precio"><%= item.price %></p>
             <div>
-                <button class="boton-item">-</button>
-                <input class="item_input" type="text" placeholder="0">
-                <button class="boton-item" >+</button>
+                <button class="boton-item boton-menos" >-</button>
+                <input class="item_input" type="text" placeholder="0" value="">
+                <button class="boton-item boton-mas" >+</button>
                 <button class="boton-standar margin-left">Agregar al Carrito</button>
             </div>
             <div class="item_metodosPago">
                 <a href="">Ver metodos de pago</a>
-                <p>- 3 CUOTAS SIN INTERÉS</p>
+                <% if (item.dues){ %>
+                <p>- <%= item.dues %> CUOTAS SIN INTERÉS</p>
+                <% } %>
             </div>
         </div>
     </section>
+    <!-- Seccion a arreglar  -->
     <h2 class="titulo_pag centrar-izquierda" >Productos relacionados</h2>
     <section class="container_tarjetas">
         <div class="tarjetas">
@@ -50,4 +55,5 @@
         </div>
     </section>
 </main>
+<script src="/js/item.js"></script>
 <%- include('../partials/footer')%>

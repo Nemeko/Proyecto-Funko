@@ -38,7 +38,7 @@ module.exports = {
     /* obtener */
     getOneItem : async (sql) => {
       try{   
-        const [rows] = await db.query('SELECT * FROM product WHERE ?', [sql]); // la query devuelve rows y fields, en este caso selecciono las rows
+        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ?', [sql]); // la query devuelve rows y fields, en este caso selecciono las rows
         return rows;
       }catch(err){
         res.status(500).render('./error',error(err));

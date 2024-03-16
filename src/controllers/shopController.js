@@ -1,6 +1,6 @@
 /* En este controller va la logica de 'Items' y las llamadas a BBDD*/
 
-const services = require('../services/shopServices');
+const services = require('../services/adminServices');
 
 
 module.exports = {
@@ -14,12 +14,16 @@ module.exports = {
     // },
     showShop : async(req, res) => {
         // res.send('testing');
-        items = await services.itemShopLoad();
+        items = await services.itemGetAll();
         // res.send(items);
         res.render('./shop/shop', {items});
     },
     showItem : async(req, res) => {
-        res.send("Carga de 1 Item, falta desarrollar");
+        const id = req.params.id;
+        const item = await services.itemGetOne(id);
+        console.log(item);
+        res.render('./shop/item', {item});
+        // res.send("Carga de 1 Item, falta desarrollar");
     }
 
 
