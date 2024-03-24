@@ -1,0 +1,100 @@
+</section>
+<h2 class="titulo_pag centrar-izquierda" >(hacer editable)</h2>
+<section class="container_tarjetas">
+    <!-- si es mas de 3 los nuestra-->
+    
+
+
+    <div class="hide">
+        <img src="../../recursos/star-wars/trooper-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >STAR WARS</h6>
+            <h5 class="tarjetas_titulo" >STORMTROOPER LIGHTSABER</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+    
+    <div class="tarjetas hide">
+        <img src="../../recursos/pokemon/pidgeotto-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >POKEMON</h6>
+            <h5 class="tarjetas_titulo" >PIDGEOTTO</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+    
+    <div class="tarjetas">
+        <img src="../../recursos/harry-potter/luna-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >HARRY POTTER</h6>
+            <h5 class="tarjetas_titulo" >LUNA LOVEGOOD LION MASK</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+
+    <div class="tarjetas">
+        <img src="../../recursos/pokemon/pidgeotto-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >POKEMON</h6>
+            <h5 class="tarjetas_titulo" >PIDGEOTTO</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+    
+    <div class="tarjetas">
+        <img src="../../recursos/harry-potter/luna-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >HARRY POTTER</h6>
+            <h5 class="tarjetas_titulo" >LUNA LOVEGOOD LION MASK</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+
+    <div class="tarjetas">
+        <img src="../../recursos/pokemon/pidgeotto-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >POKEMON</h6>
+            <h5 class="tarjetas_titulo" >PIDGEOTTO</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+    
+    <div class="tarjetas">
+        <img src="../../recursos/harry-potter/luna-1.webp" alt="">
+        <div>
+            <h6 class="tarjetas_categoria" >HARRY POTTER</h6>
+            <h5 class="tarjetas_titulo" >LUNA LOVEGOOD LION MASK</h5>
+            <h6 class="tarjetas_precio">$ 1799,99.-</h6>
+            <h6 class="tarjetas_cuotas" >3 cuotas sin interes</h6>
+        </div>
+    </div>
+
+</section>
+
+
+<section>
+    <ul class="item_container">
+        <% items.forEach( item => { %>
+        <li class="item_container_card">
+            <a class="item_container_card_link" href="/shop/item/<%= item.product_id %>"">
+                <img class="item_container_img" src='<%=item.image_front%>' alt="">
+                <div class="item_container_card_info">
+                    <h6 class="item_categoria" ><%= item.licence_name %></h6>
+                    <h5 class="item_titulo" ><%= item.product_name %></h5>
+                    <h6 class="item_precio"><%= item.price %></h6>
+                    <% if (item.dues){ %>
+                    <h6 class="item_cuotas" ><%= item.dues %> Cuotas</h6>
+                    <% } %>
+                </div>
+            </a>
+        </li>
+        <% }) %>
+    </ul>
+    <!-- fin de iteraccion -->
+</section>

@@ -1,0 +1,23 @@
+
+  <section class="seccion_tarjetas">
+    <button id="prev" class="boton-tarjetas"><</button>
+    <div class="seccion_tarjetas_container">  
+    <% cards.forEach( card => { %> 
+      
+      <a class="tarjetas" href="/shop/item/<%= card.product_id %>">
+        <img class="image_front" src="<%= card.image_front %>" alt="">
+          <div class="tarjetas_text">
+            <h6 class="tarjetas_categoria" ><%= card.licence_name %></h6>
+            <h5 class="tarjetas_titulo" ><%= card.product_name %></h5>
+            <h5 class="tarjetas_precio"><%= card.price %></h5>
+            <% if (card.dues){ %>
+              <h6 class="tarjetas_cuotas"><%= card.dues %> Cuotas sin interes</h6>
+            <% } %>
+          </div>
+      </a>
+    
+    <% }) %>
+    </div>
+    <button id="next" class="boton-tarjetas">></button>
+  </section>
+<script src="/js/tarjetas.js"></script>

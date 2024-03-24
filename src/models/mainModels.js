@@ -60,6 +60,18 @@ module.exports = {
         db.releaseConnection();
       }
     },
+    getAllItemsByLicence : async (sql)=> {
+      try{
+        const [rows] = await db.query('SELECT * FROM product JOIN licence ON product.licence_id=licence.licence_id WHERE product.licence_id=?', [sql]);
+        return rows;
+      }catch(err){
+        error.load(err)
+        throw(error);
+      }finally{
+        console.log("Liberando conexion de la BBDD");
+        db.releaseConnection();
+      }
+    },
     getSearchAdmin : async (sql)=>{
       try{
         const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[sql,sql,sql]);

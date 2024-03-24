@@ -7,12 +7,14 @@
     padding: var(--spacing-12) var(--spacing-16);
     font-size: var(--font-size-xs);
     min-width: 13rem;
+    transition:0.3s;
 }
 
 .boton-redondo{
     border-radius: 30px;
     height: auto;
     font-size: 1em;
+    transition:0.2s;
 }
 
 .boton-delete{
@@ -42,6 +44,7 @@
     border-style: none;
     font-size: var(--font-size-m);
     margin: var(--spacing-68) 0px;
+    transition:0.3s;
 }
 
 .boton-blanco:hover{
@@ -49,6 +52,25 @@
     color: var(--ligh-1);
     /* transform: translateY(-2px); */
     cursor: pointer;
+}
+
+.boton-tarjetas{
+    background-color: var(--dark-bg-2);
+    color: var(--ligh-1);
+    border-style: none;
+    font-size: var(--font-size-xl);
+    width: 50px;
+    margin: 0 20px;
+    border-radius: 20px;
+    height: 65px;
+    padding-bottom: .5rem;
+    transition:0.3s;
+}
+
+.boton-tarjetas:hover{
+    background-color: var(--blue-4);
+    opacity: 1;
+
 }
 
 

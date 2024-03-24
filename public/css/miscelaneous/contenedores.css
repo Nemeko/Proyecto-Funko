@@ -4,8 +4,7 @@
 .container_filter,
 .container_item,
 .list_container,    /* cambiar a container_list */
-.sub-container,     /* cambiar a container_sub */
-.container_tarjetas{
+.sub-container{     /* cambiar a container_sub */
     display: flex;
 }
 
@@ -54,13 +53,6 @@
 .container-opciones{
     align-items: center;
     justify-content: space-between;
-}
-
-.container_tarjetas{
-    height: auto;
-    width: 100%;
-    justify-content: space-around;
-    flex-wrap: wrap;
 }
 
 .container_contenido{

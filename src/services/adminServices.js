@@ -55,6 +55,9 @@ module.exports = {
         return await db.getSearchAdmin(params);
     },
 
+    itemGetByLicence: async (params) => {
+        return await db.getAllItemsByLicence(params);
+    },
 
     /* Editar */
     itemEdit : async (params, id) => {

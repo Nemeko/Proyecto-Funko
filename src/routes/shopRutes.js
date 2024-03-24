@@ -6,8 +6,13 @@ const shopController = require('../controllers/shopController.js')
 
 
 // router.get('/item/:id', shopController.getItem);
-router.get('/', shopController.showShop);
-router.get('/item/:id', shopController.showItem);
+// router.get('/', shopController.showShop);
+// router.get('/item/:id', shopController.showItem);
+
+router.get('/', shopController.home);
+router.get('/shop', shopController.showShop);
+router.get('/shop/item/:id', shopController.showItem);
+
 
 // router.get('/list', adminController.itemsList);
 

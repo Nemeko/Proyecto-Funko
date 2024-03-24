@@ -29,8 +29,10 @@ app.use(express.json());
 
 // app.use('/', (req, res) => res.send("Funko Test"));
 // app.use('/shop', shopRutes);
-app.use('/', mainRoutes)
-app.use('/shop', shopRoutes);
+// app.use('/', mainRoutes)
+// app.use('/shop', shopRoutes);
+
+app.use('/', shopRoutes)
 app.use('/admin', adminRutes);
 
 // app.get('/admin', (req, res)=>{

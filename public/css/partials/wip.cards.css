@@ -1,0 +1,49 @@
+
+
+/* tarjetas */
+.tarjetas{
+    /* border: 2px solid white; */
+    /* margin: 4rem; */
+    width: 35rem;
+    min-width: 28rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.tarjetas img{
+    width: 100%;
+    
+}
+
+.tarjetas div{
+    /* border: 2px solid white; */
+    height: 14rem;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: var(--spacing-28) ;
+    /* justify-content: space-between; */
+}
+
+
+.tarjetas_categoria,
+.tarjetas_precio,
+.tarjetas_cuotas{
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    /* margin-top: var(--spacing-12); */
+}
+.tarjetas_titulo{
+    font-size: var(--font-size-m);
+    /* height: 100%; */
+    margin: auto 0px;
+}
+
+.tarjetas_precio,
+.tarjetas_cuotas{
+    margin-top: 1rem;
+}
+
+.tarjetas_cuotas{
+    color: var(--blue-3);
+}
