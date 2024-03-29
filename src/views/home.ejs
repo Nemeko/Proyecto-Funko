@@ -4,39 +4,26 @@
         <div class="baner_box container-pagina" >
         <h3 class="baner_titulo">Nuevos Ingresos</h3>
         <h6 class="baner_descripcion">Descubri el proximo Funko Pop de tu coleccion</h6>
-        <!-- <input class="boton-blanco" type="button" value="SHOP"> -->
         <a class="boton-blanco" href='/shop'>SHOP</a>
         </div>
     </section>    
     <main class="container-pagina">
         <section class="descripcion">
-            <div class="container_contenido" >
-                <div>
-                    <H2>STAR WARS & THE MANDALORIAN</H2>
-                    <h5>Disfruta de una safa que sigue agregando personajes a su coleccion.</h5>
-                    <hr>
-                    <input class="boton-redondo" type="button" value="Ver Coleccion">
+            <% licences.forEach( licence => { %> 
+                <div class="container_contenido" >
+                    <div>
+                        <H2><%= licence.licence_name %></H2>
+                        <h5><%= licence.licence_description %></h5>
+                        <hr>
+                        <a class="boton-redondo" href='/shop'>Ver Coleccion</a>
+                    </div>
+                    <img class="licence-image" src="<%= licence.licence_image %>" alt="">    
                 </div>
-                <img src="../../recursos/star-wars/baby-yoda-1.webp" alt="">    
-            </div>
-            <div class="container_contenido">
-                <div>
-                    <H2>POKEMON INDIGO</H2>
-                    <h5>Atrapa todos los que puedas y disfruta de una coleccion llena de amigos.</h5>
-                    <hr>
-                    <input class="boton-redondo" type="button" value="Ver Coleccion">
-                </div>
-                <img src="../../recursos/pokemon/vulpix-1.webp" alt="">
-            </div>
-            <div class="container_contenido">
-                <div>
-                    <H2>HARRY POTTER</H2>
-                    <h5>Revive los recuerdos de una saga llena de magia y encanto</h5>
-                    <hr>
-                    <input class="boton-redondo" type="button" value="Ver Coleccion">
-                </div>
-                <img src="../../recursos/harry-potter/snape-patronus-1.webp" alt="">
-            </div>
+              <% }) %>
+        </section>
+        <section>
+            <h1>ULTIMOS LANZAMIENTOS</h1>
             <%- include('./partials/cards')%> 
+        </section>
     </main>
     <%- include('./partials/footer')%>

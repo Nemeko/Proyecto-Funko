@@ -51,6 +51,8 @@ module.exports = {
       try{
         // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id');
         const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id');
+        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id ORDER BY rand() LIMIT 2');
+        
         return rows;
       }catch(err){
         error.load(err)

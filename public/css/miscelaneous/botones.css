@@ -1,10 +1,12 @@
 
-.boton-standar{
+.boton-standar,
+.boton-redondo{
     background-color: var(--blue-4);
     color: var(--ligh-1);
     border-style: none;
     height: 45px;
     padding: var(--spacing-12) var(--spacing-16);
+    margin: 0 var(--spacing-16);
     font-size: var(--font-size-xs);
     min-width: 13rem;
     transition:0.3s;
@@ -12,15 +14,7 @@
 
 .boton-redondo{
     border-radius: 30px;
-    height: auto;
-    font-size: 1em;
-    transition:0.2s;
-}
-
-.boton-delete{
-    background-color: transparent;
-    border: none;
-    width: fit-content;
+    font-size: var(--font-size-xx);
 }
 
 .boton-item{
@@ -34,23 +28,28 @@
     color: var(--ligh-1);
 }
 
+.boton-standar:hover,
+.boton-redondo:hover,
+.boton-item:hover{
+    background-color: var(--blue-2);
+}
 
 .boton-blanco{
+    display: flex;
     color: var(--dark-bg-4);
     background-color: var(--ligh-1);
     border-radius: 30px;
     min-width: 24rem;
     height: 5rem;
-    border-style: none;
     font-size: var(--font-size-m);
-    margin: var(--spacing-68) 0px;
+    justify-content: center;
+    align-items: center;
     transition:0.3s;
 }
 
 .boton-blanco:hover{
     background-color: var(--blue-4);
     color: var(--ligh-1);
-    /* transform: translateY(-2px); */
     cursor: pointer;
 }
 
@@ -73,23 +72,8 @@
 
 }
 
-
-
-.boton-standar,
-.boton-redondo{
-    background-color: var(--blue-4);
-    color: var(--ligh-1);
-    border-style: none;
-    height: 45px;
-    padding: var(--spacing-12) var(--spacing-16);
-    /* margin: 0 var(--spacing-16); */
-    font-size: var(--font-size-xs);
-    min-width: 13rem;
+.boton-delete{
+    background-color: transparent;
+    border: none;
+    width: fit-content;
 }
-
-.boton-standar:hover,
-.boton-redondo:hover,
-.boton-item:hover{
-    background-color: var(--blue-2);
-}
-

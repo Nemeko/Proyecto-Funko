@@ -59,6 +59,15 @@ module.exports = {
         return await db.getAllItemsByLicence(params);
     },
 
+    licenceGetAll: async (params) => {
+        return await db.getAllLicence();
+    },    
+
+
+
+
+
+
     /* Editar */
     itemEdit : async (params, id) => {
         console.log('- Servicios -> itemEdit');

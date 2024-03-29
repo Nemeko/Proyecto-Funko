@@ -1,12 +1,9 @@
 /*nuevas tarjetas */
 
 .seccion_tarjetas{
-    /* overflow: auto; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
-    /* overflow: scroll; */
 }
 
 .seccion_tarjetas_container{
