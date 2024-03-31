@@ -14,9 +14,7 @@ module.exports = {
     },
 
     showShop : async(req, res) => {
-        // res.send('testing');
         items = await services.itemGetAll();
-        // res.send(items);
         res.render('./shop/shop', {items});
     },
     
@@ -25,6 +23,14 @@ module.exports = {
         const item = await services.itemGetOne(id);
         const cards = await services.itemGetByLicence(item.licence_id);
         res.render('./shop/item', {item, cards});
+        // res.send("Carga de 1 Item, falta desarrollar");
+    },
+
+    search : async(req, res) => {
+        
+        // const cards = await services.itemGetByLicence(item.licence_id);
+        // renderizar la propia pagina de
+        // res.render('./shop/item', {item, cards});
         // res.send("Carga de 1 Item, falta desarrollar");
     }
 

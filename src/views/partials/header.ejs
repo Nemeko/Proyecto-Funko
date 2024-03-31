@@ -11,6 +11,14 @@
     <header class="header">
         <nav class="header_nav container-header-footer">
             <a class="header_logo" href="/"><img class="" src="/img/branding/logo_light_horizontal.svg" alt="logo"></a>
-            <a class="header_link" href="/admin/list">SALIR</a>
+            <div class="header_link">
+                <% if(locals.isLogged){ %>
+                    <a href="/admin/list"> ADMIN </a> <!-- o SHOP dependiendo la pag -->
+                    <a href="/auth/logout"> SALIR </a> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
+                <% }else{ %>
+                    <a href="/auth/login"> INGRESAR </a> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
+                <% } %>
+                <a href="/"> Carrito - Icono </a> <!-- dependiendo la pag si esta en admin no hace falta-->
+            </div>
         </nav>
     </header>

@@ -36,9 +36,9 @@ module.exports = {
     
 
     /* obtener */
-    getOneItem : async (sql) => {
+    getOneItem : async (params) => {
       try{   
-        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ?', [sql]); // la query devuelve rows y fields, en este caso selecciono las rows
+        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ?', [params]); // la query devuelve rows y fields, en este caso selecciono las rows
         return rows;
       }catch(err){
         res.status(500).render('./error',error(err));
@@ -62,9 +62,9 @@ module.exports = {
         db.releaseConnection();
       }
     },
-    getAllItemsByLicence : async (sql)=> {
+    getAllItemsByLicence : async (params)=> {
       try{
-        const [rows] = await db.query('SELECT * FROM product JOIN licence ON product.licence_id=licence.licence_id WHERE product.licence_id=?', [sql]);
+        const [rows] = await db.query('SELECT * FROM product JOIN licence ON product.licence_id=licence.licence_id WHERE product.licence_id=?', [params]);
         return rows;
       }catch(err){
         error.load(err)
@@ -74,9 +74,10 @@ module.exports = {
         db.releaseConnection();
       }
     },
-    getSearchAdmin : async (sql)=>{
+    getSearchAdmin : async (params)=>{
       try{
-        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[sql,sql,sql]);
+        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
+        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ');
         return rows;
       }catch(err){
         error.load(err)
@@ -98,9 +99,9 @@ module.exports = {
         db.releaseConnection();
       }
     },
-    getOneLicence : async(sql) => {
+    getOneLicence : async(params) => {
       try{  
-        const [rows] = await db.query('SELECT * FROM licence WHERE ?', [sql]);
+        const [rows] = await db.query('SELECT * FROM licence WHERE ?', [params]);
         return rows;
       }catch(err){
         // error.Obtener(err);
@@ -121,9 +122,9 @@ module.exports = {
         db.releaseConnection();
       }
     },
-    getOneCategory : async(sql) => {
+    getOneCategory : async(params) => {
       try{  
-        const [rows] = await db.query('SELECT * FROM category WHERE ?', [sql]);
+        const [rows] = await db.query('SELECT * FROM category WHERE ?', [params]);
         return rows;
       }catch(err){
         // return error.Obtener(err);
@@ -133,6 +134,24 @@ module.exports = {
       }
     },
 
+
+
+    /* Buscar */
+
+    getSearch : async (sql, params)=>{ // params es un array que debe conincidir con los ? para que no de error 
+      try{
+        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
+        console.log(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE`+sql);
+        const [rows] = await db.query(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE `+sql, params);
+        return rows;
+      }catch(err){
+        error.load(err)
+        throw(error);
+      }finally{
+        console.log("Liberando conexion de la BBDD");
+        db.releaseConnection();
+      }
+    },
 
 
     /* Editar */
@@ -175,62 +194,3 @@ module.exports = {
       }
     }  
  }
-
-
-
-
-
-
-
-/* Agregar */
-/* INSERT INTO `category`(`category_id (este campo es auto increment)`, `category_name`, `category_description`) VALUES ('value-1','value-2','value-3') */
-
-/* actualizar */
-// UPDATE `category` SET `category_id`='[value-1]',`category_name`='[value-2]',`category_description`='[value-3]' WHERE category_id=1
-
-
-// module.exports = {
-//     getAllItem,
-//     getOneItem,
-//     getAllLicence,
-//     getOneLicence,
-//     getAllCategory,
-//     getOneCategory, 
-//     updateItem, 
-//     updateImage
-// }
-
-
-
-
-
-/*
-
-{
-  product_name: 'test',
-  product_description: 'test',
-  price: '123',
-  stock: '1',
-  discount: '1',
-  sku: 'test09',
-  dues: null,
-  image_front: '/img/Imagenes-Funko/1708808014464-vulpix-1.webp',
-  image_back: null,
-  licence_id: '1',
-  category_id: '1'
-}
-
-{
-  product_name: 'testing',
-  product_description: 'testing carga BBDD con null',
-  price: '124',
-  stock: '123',
-  discount: '2',
-  sku: 'test08',
-  dues: null,
-  image_front: '/img/Imagenes-Funko/1708805953951-charmander-1.webp',
-  image_back: '/img/Imagenes-Funko/1708555837683-vulpix-box.webp',
-  licence_id: '1',
-  category_id: '1'
-}
-*/

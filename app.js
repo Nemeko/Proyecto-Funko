@@ -1,17 +1,23 @@
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
+const { initSession } = require('./src/utils/sessions.js');
+const { logged } = require('./src/utils/logged.js');
 require('dotenv').config();
 const PORT = process.env.PORT;
 const adminRutes = require('./src/routes/adminRutes');
-const shopRoutes = require('./src/routes/shopRutes.js')
-const mainRoutes = require('./src/routes/mainRoutes.js');
+const authRutes = require('./src/routes/authRutes.js');
+const shopRoutes = require('./src/routes/shopRutes.js');
 const { notFound } = require('./src/utils/errorHandler.js');
+
 
 
 /* define carpeta de archivos estaticos */
 app.use(express.static('public'));  //ruta para las paginas en local
 
+/* Crea una session de usuario (inicializacion) */
+app.use(initSession()); // Verifica si el user esta logueado
+app.use(logged);        // Lo utilizo para el manejo de las opciones del header
 
 /* configuracion del Template Engine - EJS */
 app.set('view engine', 'ejs');
@@ -21,35 +27,13 @@ app.set('views', './src/views');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-
-/* middleware para poder utilizar los metodos PUT y DELETE */
-// app.use(methodOverride('_method'));
-
-/* Rutas de aplicacion */
-
-// app.use('/', (req, res) => res.send("Funko Test"));
-// app.use('/shop', shopRutes);
-// app.use('/', mainRoutes)
-// app.use('/shop', shopRoutes);
-
+/* Rutas */
 app.use('/', shopRoutes)
+app.use('/auth', authRutes);
 app.use('/admin', adminRutes);
 
-// app.get('/admin', (req, res)=>{
-//     console.log('Dentro deladmin');
-//     res.send('Dentro del Admin')
-// });
+/* 404 */
+app.use(notFound); // Manejo del error 404
 
-
-// app.get('/admin/create', (req, res)=>{
-//     console.log('dentro del create');
-//     res.send('dentro de create');
-// });
-
-
-
-/* agregar una ruta para la config de la pag */
-/* admin o config ? */ 
-
-app.use(notFound);                  // Manejo del error 404
+/* Puerto */
 app.listen(PORT, () => console.log(`\n- Servidor corriendo en el puerto ${PORT}`));

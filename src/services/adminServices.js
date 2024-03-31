@@ -63,7 +63,15 @@ module.exports = {
         return await db.getAllLicence();
     },    
 
+    /* Buscar */
 
+    seachAdmin: async (params) => {
+        console.log("dentro del servicio")
+        const sql = 'product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?';
+        params = [params, params, params];
+        console.log(params);
+        return await db.getSearch(sql, params);
+    },
 
 
 

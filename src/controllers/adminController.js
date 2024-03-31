@@ -19,7 +19,8 @@ module.exports = {
             const { search } = req.query
             console.log(`Search: ${search}`);
             if (search){
-                items = await services.itemSearchAdmin(`%${search}%`);
+                // items = await services.itemSearchAdmin(`%${search}%`);
+                items = await services.seachAdmin(`%${search}%`);
                 console.log("dentro del search");
                 res.render('./admin/admin',{items})
             }else{
@@ -143,43 +144,18 @@ module.exports = {
     },
 
     /* ItemSearch API */
-
     itemSearch : async (req, res) => {
         try{
             console.log("Dentro del API search")
             const { search } = req.query
             console.log(`Search: ${search}`);
-            items = await services.itemSearchAdmin(`%${search}%`);
+            // items = await services.itemSearchAdmin(`%${search}%`);
+            items = await services.seachAdmin(`%${search}%`);
             res.send(items)
         }catch(err){
             res.status(500).render('./error',{err})
         }
     },
-
-
-
-
-
-
-
-
-
-
-
-    userLogin : async (req, res) => {
-        res.render('./auth/login');
-    },
-
-    adminRegisterLoad : async (req, res) => {
-        res.render('./admin/register');
-    },
-
-    adminRegister : async (req, res) => {
-        console.log('Controller -> adminRegister');
-        res.send('Controller -> adminRegister');
-    },
-
-
 
     /* Item delete */
     itemDelete : async (req, res) => {
