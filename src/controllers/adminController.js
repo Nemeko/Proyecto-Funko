@@ -17,17 +17,17 @@ module.exports = {
     itemsList : async (req, res) => {
         try{
             const { search } = req.query
-            console.log(`Search: ${search}`);
+            const headerMenu = req.headerMenu
+            let items = [];
+
             if (search){
-                // items = await services.itemSearchAdmin(`%${search}%`);
                 items = await services.seachAdmin(`%${search}%`);
                 console.log("dentro del search");
-                res.render('./admin/admin',{items})
             }else{
                 items = await services.itemGetAll();
-                console.log("dentro del list")
-                res.render('./admin/admin',{items})
+                console.log("dentro del list")                
             }
+            res.render('./admin/admin',{items, headerMenu});
             
         }catch(err){
             res.status(500).render('./error',{err})
@@ -42,6 +42,7 @@ module.exports = {
         const category = await db.getAllCategory();
         const licence = await db.getAllLicence();
         const formAction = `/admin/create`;
+        const headerMenu = req.headerMenu
 
         const view = {
             tapName : "Admin | FUNKO",
@@ -49,31 +50,17 @@ module.exports = {
             method: ""
         }    
         
-        // const info = await db.dbInfo();
-        // console.log('dbINFO => ', info);     // testing de la info de la BD
-
-        const item =  {
-                    product_id: '',
-                    product_name: '',
-                    product_description: '',
-                    price: '',
-                    stock: '',
-                    discount: '',
-                    sku: '',
-                    dues: '',
-                    image_front: '',
-                    image_back: '',
-                    licence_id: '',
-                    category_id: ''
-                }
-            // res.render('./admin/create',{item: item,view: view});
-            res.render('./admin/create',{
-                formAction: formAction,
-                view: view,
-                item: item,
-                category: category,
-                licence: licence
-            });
+        const newSchema = await services.itemSchema("product");
+        console.log("New Schema ==> ", newSchema); 
+       
+        res.render('./admin/create',{
+            formAction: formAction,
+            view: view,
+            item: newSchema,
+            category: category,
+            licence: licence,
+            headerMenu
+        });
     },
 
     itemCreate : async(req, res) => {
@@ -101,7 +88,7 @@ module.exports = {
         }     
         
         const id = req.params.id;
-        console.log("ID: ", id);
+        const headerMenu = req.headerMenu
         // const item = await db.getOneItem({product_id: id});        // Hay que mandar la consulta para completar la query 
         const item = await adminServices.itemGetOne(id);
         // console.log('item devuelto por la BBDD: ',item);
@@ -110,17 +97,13 @@ module.exports = {
         const category = await db.getAllCategory();
         const licence = await db.getAllLicence();
         
-        // console.log('- Controller - ItemEditLoad');
-        // console.log(' -- Item => ', item);
-        console.log(` ---------------- `);
-        // console.log('-- Controller - formAction -> ',formAction);
-
         res.render('./admin/create',{
             formAction: formAction,
             view: view,
             item: item,
             category: category,
-            licence: licence
+            licence: licence,
+            headerMenu
         });
     },
 

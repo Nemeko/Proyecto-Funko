@@ -4,21 +4,20 @@
         <h2 class="titulo_pag">INGRESAR A MI CUENTA</h2>
             <form action="/auth/login" method="POST" enctype="application/x-www-form-urlencoded">
                 <div class="sub-container">
-                    <p>Email</p>
-                    <input type="email" name="email" placeholder="johndoe@correo.com">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="johndoe@correo.com">
                 </div>
                 <div class="sub-container">
-                    <p>Contraseña</p>
-                    <input type="password" name="password" placeholder="••••••••">
+                    <label for="pass">Contraseña</label>
+                    <input type="password" name="password" id="pass" placeholder="••••••••">
                 </div>
-                <div class="sub-container container-center">
+                <!-- <div class="sub-container container-center"> -->
+                <div class="ingresar">
                     <button class="boton-standar" type="submit">Ingresar</button>
                     <div class="checkbox">
-                        <input type="checkbox" name="Recordarme" id="checkbox_recordarme">
-                        <p>Recordarme</p>
+                        <a class="link-azul" href="">Olvidé mi contraseña</a>
                     </div>
                 </div>
-                <a class="link-azul" href="">Olvidé mi contraseña</a>
             </form>
     </main>
 

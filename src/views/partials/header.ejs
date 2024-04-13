@@ -13,12 +13,19 @@
             <a class="header_logo" href="/"><img class="" src="/img/branding/logo_light_horizontal.svg" alt="logo"></a>
             <div class="header_link">
                 <% if(locals.isLogged){ %>
-                    <a href="/admin/list"> ADMIN </a> <!-- o SHOP dependiendo la pag -->
-                    <a href="/auth/logout"> SALIR </a> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
+                    <% headerMenu.forEach(opcion => { %>
+                        <div class="header_link_blue"><a href="<%= opcion.url %>"> <%= opcion.menu %> </a></div><!-- o SHOP dependiendo la pag -->
+                    <% }) %>
+                    <div class="header_link_red"><a  href="/auth/logout"> SALIR </a></div> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
                 <% }else{ %>
-                    <a href="/auth/login"> INGRESAR </a> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
+                    <div class="header_link_blue"><a href="/auth/login"> INGRESAR </a></div> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
                 <% } %>
-                <a href="/"> Carrito - Icono </a> <!-- dependiendo la pag si esta en admin no hace falta-->
+                <a class="" href="/">
+                    <svg class="icono icono-cart" role="img">
+                        <use xlink:href="/icons/icons.svg#cart" alt="carrito"></use>
+                    </svg>
+                </a>
+                <!-- <div class="header_link_blue"><a href="/"> Carrito - Icono </a></div> dependiendo la pag si esta en admin no hace falta -->
             </div>
         </nav>
     </header>

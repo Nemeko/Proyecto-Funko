@@ -6,7 +6,7 @@
                 <div>
                     <label for="licencia">Licencia:</label>
                     <select name="licence_id" id="licencia">
-                        <% if(item.licence_id == ''){ %> 
+                        <% if(item.licence_id == null){ %> 
                             <option value="" disabled hidden selected>-- Seleccionar --</option> 
                         <% } %>    
                         <% licence.forEach(licencia => { %>
@@ -17,7 +17,7 @@
                 <div>
                     <label for="categoria">categoría:</label>
                     <select autocomplete="off" name="category_id" id="categoria">
-                        <% if(item.category_id == ''){ %> 
+                        <% if(item.category_id == null){ %> 
                             <option value="" disabled hidden selected>-- Seleccionar --</option> 
                         <% } %> 
                         <% category.forEach(categoria => { %>
@@ -28,9 +28,9 @@
             </div>
             <div>
                 <label for="producto">Nombre del producto:</label>
-                <input class="size-nombre" placeholder="Nombre" type="text" name="name" id="producto" value="<%= item.product_name %>">
+                <input class="size-nombre" placeholder="Nombre" type="text" name="product_name" id="producto" value="<%= item.product_name %>">
             </div>
-            <textarea name="description" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
+            <textarea name="product_description" id="detalles" cols="30" rows="10" placeholder="Descripcion..."><%= item.product_description %></textarea>
             <div>
                 <label for="sku">SKU:</label>
                 <input class="size-sku" placeholder="SSKK111AB001" type="text" name="sku" id="sku" value="<%= item.sku %>">
@@ -41,7 +41,7 @@
             </div>
             <div>
                 <label for="descuento">Descuento:</label>
-                <input class="size-descuento"  placeholder="0" type="text" name="discount" id="descuento" value="<%= item.discount %>"><spam class="porcentaje">%</spam>
+                <input class="size-descuento"  placeholder="0" type="number" name="discount" id="discount" value="<%= item.discount %>" min="0" max="100"><spam class="porcentaje">%</spam>
                 <label for="cuotas">Cuotas:</label>
                 <select name="dues" id="cuotas">
                     <option value="" disabled hidden selected>-- Seleccionar --</option>

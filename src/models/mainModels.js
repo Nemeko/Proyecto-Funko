@@ -7,6 +7,7 @@ const error = {     // mover al errorhandeler y arreglar
   message:"Error desconocido ",
   load(e){
     this.message = "Algo anda mal con la BBDD -> " + e;
+    this.e = e;
   }
 }
 
@@ -21,6 +22,7 @@ module.exports = {
     /* Crear */
     insertItem : async(params) => { /* modificar para que tome las keys y las values en 2 parametros */
       try{
+        console.log(`SQL ====>  INSERT INTO product SET ${params}`);
         await db.query('INSERT INTO product SET ?', [params])
       }catch(err){
         console.log(err);
@@ -31,7 +33,18 @@ module.exports = {
         db.releaseConnection();
       }
     },
-
+    insertUser : async(user) => {
+      try{
+        await db.query('INSERT INTO user SET ?', [user]);
+      }catch(err){
+        console.log(err);
+        error.load(err);
+        throw(error);
+      }finally{
+        console.log("Liberando conexion de la BBDD");
+        db.releaseConnection();
+      }
+    },
     
     
 
@@ -137,7 +150,6 @@ module.exports = {
 
 
     /* Buscar */
-
     getSearch : async (sql, params)=>{ // params es un array que debe conincidir con los ? para que no de error 
       try{
         // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
@@ -157,7 +169,8 @@ module.exports = {
     /* Editar */
     updateItem : async(params, id) => {
       try{
-      const [rows] = await db.query('UPDATE product SET ? WHERE product_id = ?',[params, id])
+      console.log(`SQL ====>  UPDATE product SET ${params} WHERE product_id = ${id}`);
+      const [rows] = await db.query('UPDATE product SET ? WHERE product_id = ?',[params, id]);
       return rows
       }catch(err){
         return error.Modificar(err);
@@ -183,14 +196,49 @@ module.exports = {
       
 
     /* DB INFO */
-    dbCabeceras : async ()=>{
+    // dbCabeceras : async ()=>{
+    //   try{
+    //   const [rows] = await db.query('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "product"');
+    //   return rows;
+    //   }catch(err){
+    //     return error.Cabeceras(err);
+    //   }finally{
+    //     db.releaseConnection();
+    //   }
+    // },
+    
+    dbCabeceras : async (table)=>{
       try{
-      const [rows] = await db.query('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "product"');
-      return rows;
+        // const [rows] = await db.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?`, [table]);
+        const [rows] = await db.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'Funkodb' AND table_name = ?`, [table]);
+        
+        return rows;
       }catch(err){
         return error.Cabeceras(err);
       }finally{
         db.releaseConnection();
       }
-    }  
+    },
+
+
+
+    
+
+
+    /* Enviar emails desde Node */
+    // https://www.w3schools.com/nodejs/nodejs_email.asp
+
+    /* User info */
+    userExist : async () => {
+      // comprobar si el usaurio existe, modificar la BBDD para que el campo email sea la key
+      // devolver si el usar es admin
+    },
+    userSetPassord : async () => {
+      // modificar la pass en base al usuario
+    },
+    userSetNew : async () => {
+      // crear usuario (registrarse)
+    },
+
+
  }

@@ -2,34 +2,39 @@
     <main class="container-pagina">
         <h2 class="titulo_pag">CREA TU CUENTA</h2>
         <section>
-            <div class="sub-container">
-                <p class>Nombre</p>
-                <input type="text" placeholder="John">
-            </div>
-            <div class="sub-container">
-                <p class>Apellido</p>
-                <input type="text" placeholder="Doe">
-            </div>
-            <div class="sub-container">
-                <p class>Email</p>
-                <input type="email" placeholder="johndoe@correo.com">
-            </div>
-            <div class="sub-container">
-                <p>Contraseña</p>
-                <input type="password" placeholder="••••••••">
-            </div>
-            <div class="sub-container">
-                <p>Repita Contraseña</p>
-                <input type="password" placeholder="••••••••">
-            </div>
-            <div class="sub-container conteiner-registrarse">
-                <button class="boton-standar" type="button">Registrarse</button>
-                <div class="checkbox">
-                    <input type="checkbox" name="Recordarme" id="checkbox_recordarme">
-                    <p>Acepto</p>
-                    <a href="">Términos y Condiciones</a>
+            <form action="/auth/register" method="POST" enctype="application/x-www-form-urlencoded">
+                <div class="sub-container">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="name" placeholder="John">
                 </div>
-            </div>
+                <div class="sub-container">
+                    <label for="lastname">Apellido</label>
+                    <input type="text" name="lastname" id="lastname" placeholder="Doe">
+                </div>
+                <div class="sub-container">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="johndoe@correo.com">
+                </div>
+                <div class="sub-container">
+                    <label for="pass">Contraseña</label>
+                    <input type="password" name="password" id="pass" placeholder="••••••••">
+                </div>
+                <div class="sub-container">
+                    <label for="passR">Repita Contraseña</label>
+                    <input type="password" name="passwordR" id="passR" placeholder="••••••••">
+                </div>
+                <!-- <div class="sub-container conteiner-registrarse"> -->
+                <div class="terminos">
+                    <div class="checkbox">
+                        <input type="checkbox" name="aceptacionDeTerminos" id="checkboxCondiciones" value="true">
+                        <label for="checkboxCondiciones">Acepto<a class="link-azul" ref="">Términos y Condiciones</a></label>
+                    </div>
+                    <button class="boton-standar" type="submit">Registrarse</button>
+                </div>
+            </form>
         </section>  
+        <% if(mensaje){ %>
+            <h1 class="register_error" > <%= mensaje %> </h1>
+        <% } %>
     </main>
     <%- include('../partials/footer')%>

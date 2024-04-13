@@ -13,6 +13,7 @@
 
 /* pages */
 @import url('./pages/home.css');
+@import url('./pages/auth.css');
 /* @import url('./pages/admin.css'); */
 @import url('./pages/item.css');
 @import url('./pages/shop.css');
@@ -71,13 +72,7 @@ label,
 
 
 
-.link-azul{
-    color: var(--blue-4);
-    margin: var(--spacing-12);
-}
-.link-azul:hover{
-    color: var(--blue-2);
-}
+
 
 
 .item_input{
@@ -189,44 +184,7 @@ textarea{
     font-size: 1.5rem;
 }
 
-/* login */
 
-input{
-    background-color: var(--dark-bg-3);
-    border: none;
-    border-bottom: 2px solid var(--blue-4);
-    outline: none;
-    height: fit-content;
-    color: var(--ligh-1);
-    padding: 5px;
-    font-size: var(--font-size-xs);
-    margin: var(--spacing-16);
-}
-
-
-
-.checkbox{
-    display: flex;
-    align-items: center;
-    
-    /* margin: var(--spacing-12); */
-}
-.checkbox p{
-font-size: var(--font-size-xs);
-/* margin-left: var(--spacing-12); */
-
-}
-.checkbox a{
-    font-size: var(--font-size-xs);
-    color: var(--blue-3);
-    margin-left: 6px;
-}
-
-
-#checkbox_recordarme{
-    width: 17px;
-    height: 17px;
-}
 
 
 /* admin */

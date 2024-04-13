@@ -18,11 +18,38 @@ header{
     height: 128px;
 }
 
+.header .header_nav .header_link{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid yellow; */
+}
+
+.header .header_nav .header_link_blue,
+.header .header_nav .header_link_red{
+    margin-right: var(--spacing-36);
+}
+
+
+.header .header_nav .header_link .icono-cart{
+    fill: var(--ligh-1);
+}
+
 .header .header_nav .header_logo:hover{
     transform: translateY(-5px);
 }
 
-.header .header_nav .header_link:hover{
+.header .header_nav .header_link_blue:hover{
+    transform: translateY(-3px);
+    color: var(--blue-4);
+}
+
+.header .header_nav .header_link_red:hover{
     transform: translateY(-3px);
     color: var(--red-3);
+}
+
+.header .header_nav .header_link .icono-cart:hover{
+    transform: translateY(-3px);
+    fill: var(--blue-4);
 }
