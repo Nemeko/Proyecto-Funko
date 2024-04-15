@@ -1,7 +1,5 @@
 /* capa servicios para antes de la conulta de modeles a la BBDD */
-const { json } = require('express');
 const db = require('../models/mainModels');
-const header = require('../middlewares/header');
 
 const schema = async(params, table) => {
     try{
@@ -13,27 +11,14 @@ const schema = async(params, table) => {
         headers.forEach((o) => itemSchema[Object.values(o)]=null);  // Creacion de objeto en base a las cabeceras de la BD
         Object.assign(itemSchema, params);                          // Clonar parametros en base al esquema de la BD
         ignoredKeys.forEach((key) => delete itemSchema[key]);       // Eliminacion de las 'Keys' no requeridas
-
-        
-
-        console.log('Headers\n');
-        console.log(headers);
-
-        console.log('\nParams\n',params);
-
-        console.log('\nSchema');
-        console.log(itemSchema);
-        console.log(' ------- ');
-
-        // const itemParams = Object.keys(itemSchema); 
-        // const itemValues = Object.values(itemSchema);  
-
         return itemSchema;
+  
     }catch(err){
         console.log(err.message);
         return err
     }
 }
+
 
 module.exports = {
     /* Crear */
@@ -43,13 +28,6 @@ module.exports = {
         itemSchema.discount == "" ? itemSchema.discount = 0:"";
         console.log(`* cabeceras => ${itemSchema}\n\n`);
         return await db.insertItem(itemSchema);
-    },
-    userCreate: async(params) => {
-        const userSchema = await schema(params, "user"); 
-        console.log(`* cabeceras => ${userSchema}\n\n`);
-        return await db.insertUser(userSchema);
-        
-
     },
 
     /* Obtener */
@@ -74,17 +52,14 @@ module.exports = {
     licenceGetAll: async (params) => {
         return await db.getAllLicence();
     },    
-
+    
     /* Buscar */
     seachAdmin: async (params) => {
-        console.log("dentro del servicio")
+        console.log("- Servicios -> search'")
         const sql = 'product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?';
         params = [params, params, params];
         return await db.getSearch(sql, params);
     },
-
-
-
 
     /* Editar */
     itemEdit : async (params, id) => {
@@ -94,17 +69,25 @@ module.exports = {
 
     },
 
-
     /* Delete */
     itemDelete : async(id)=>{
         return await db.deleteItem(id);
     },
 
-
     /* Schema */
     itemSchema : async(table)=>{
         const params = null;
         return await schema(params, table); 
-    }
+    },
 
+    /* users */
+    userCreate: async(params) => {
+        const userSchema = await schema(params, "user"); 
+        console.log(`* cabeceras => ${userSchema}\n\n`);
+        return await db.insertUser(userSchema);
+    },
+    userCheck: async(params) => {
+        const [user] = await db.userExist(params);
+        return user;
+    }
 }

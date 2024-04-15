@@ -1,6 +1,6 @@
 /* En modelos unicamente va las consultas query a BBDD */
 
-const  { db } = require('../config/db');     // cargamos el archivo de conf de la BBDD
+const  { db } = require('../config/db'); 
 
 const error = {     // mover al errorhandeler y arreglar
   isError:true,
@@ -11,18 +11,10 @@ const error = {     // mover al errorhandeler y arreglar
   }
 }
 
-
-// const error = (e) => {
-//   console.log("dentro de la funcion error")
-//   const message = "Algo anda mal con la BBDD -> " + e;
-//   res.status(500).render('./error',message);
-// }
-
 module.exports = {
     /* Crear */
     insertItem : async(params) => { /* modificar para que tome las keys y las values en 2 parametros */
       try{
-        console.log(`SQL ====>  INSERT INTO product SET ${params}`);
         await db.query('INSERT INTO product SET ?', [params])
       }catch(err){
         console.log(err);
@@ -33,28 +25,15 @@ module.exports = {
         db.releaseConnection();
       }
     },
-    insertUser : async(user) => {
-      try{
-        await db.query('INSERT INTO user SET ?', [user]);
-      }catch(err){
-        console.log(err);
-        error.load(err);
-        throw(error);
-      }finally{
-        console.log("Liberando conexion de la BBDD");
-        db.releaseConnection();
-      }
-    },
+        
     
-    
-
     /* obtener */
     getOneItem : async (params) => {
       try{   
         const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ?', [params]); // la query devuelve rows y fields, en este caso selecciono las rows
         return rows;
       }catch(err){
-        res.status(500).render('./error',error(err));
+        // res.status(500).render('./error',error(err));
       }finally{
         console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
@@ -148,7 +127,6 @@ module.exports = {
     },
 
 
-
     /* Buscar */
     getSearch : async (sql, params)=>{ // params es un array que debe conincidir con los ? para que no de error 
       try{
@@ -181,7 +159,6 @@ module.exports = {
     },
 
 
-
     /* Eliminar */
     deleteItem : async(id) => {
       try{
@@ -192,21 +169,6 @@ module.exports = {
         db.releaseConnection();
       }
     },
-      
-      
-
-    /* DB INFO */
-    // dbCabeceras : async ()=>{
-    //   try{
-    //   const [rows] = await db.query('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "product"');
-    //   return rows;
-    //   }catch(err){
-    //     return error.Cabeceras(err);
-    //   }finally{
-    //     db.releaseConnection();
-    //   }
-    // },
-    
     dbCabeceras : async (table)=>{
       try{
         // const [rows] = await db.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?`, [table]);
@@ -220,25 +182,38 @@ module.exports = {
       }
     },
 
-
-
-    
-
-
     /* Enviar emails desde Node */
     // https://www.w3schools.com/nodejs/nodejs_email.asp
 
     /* User info */
-    userExist : async () => {
-      // comprobar si el usaurio existe, modificar la BBDD para que el campo email sea la key
-      // devolver si el usar es admin
+    insertUser : async(user) => {
+      try{
+        await db.query('INSERT INTO user SET ?', [user]);
+      }catch(err){
+        console.log(err);
+        error.load(err);
+        throw(error);
+      }finally{
+        console.log("Liberando conexion de la BBDD");
+        db.releaseConnection();
+      }
     },
-    userSetPassord : async () => {
-      // modificar la pass en base al usuario
-    },
-    userSetNew : async () => {
-      // crear usuario (registrarse)
+    userExist : async (params) => {
+      try{   
+        const [rows] = await db.query('SELECT * FROM user WHERE email=?', [params]); // la query devuelve rows y fields, en este caso selecciono las rows
+        console.log("db user email - ", rows);
+        return rows;
+      }catch(err){
+        console.log(err);
+        res.status(500).render('./error',error(err));
+      }finally{
+        console.log("Liberando conexion de la BBDD");
+        db.releaseConnection();
+      }
     },
 
+    userSetPassord : async () => {
+      // modificar la pass en db para el usuario
+    }
 
  }
