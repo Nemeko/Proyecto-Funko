@@ -1,9 +1,6 @@
 const multer = require('multer');
 const path = require('path');           /* esto lo utilizo para resolver la ruta desde donde estoy */
 
-
-// console.log('- Middleware -> UploadFiles');    
-
 /* Logica para guardar las imagenes */
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, path.resolve(__dirname, '../../public/img/Imagenes-Funko')), // ruta destination

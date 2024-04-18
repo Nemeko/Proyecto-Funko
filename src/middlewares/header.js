@@ -1,3 +1,4 @@
+/* Config del menu del header si esta logueado */
 
 module.exports = {    
     admin : (req, res, next) => {

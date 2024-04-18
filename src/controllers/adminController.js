@@ -1,16 +1,8 @@
 
-/* En este controller va la logica de 'Items' y las llamadas a BBDD*/
-
-// const { getAllItem, getOneItem } = require('../models/mainModels');
-const { secureHeapUsed } = require('crypto');
 const db = require('../models/mainModels');
 const adminServices = require('../services/adminServices');
 const services = require('../services/adminServices');
 const fs = require('fs');   // Se llama para eliminar archivos del directorio
-const { on } = require('events');
-
-// console.log("dirname: ",__dirname);              //Directorio donde se ejecuta el archivo (adminController.js)
-// console.log("process.cwd: ",process.cwd());      //Directorio donde se ejecuta node (app.js)
 
 module.exports = {
     /* Admin list */
@@ -32,8 +24,6 @@ module.exports = {
         }catch(err){
             res.status(500).render('./error',{err})
         }
-        // items.isError ? databaseErrorResponse : etc ;
-        // redirigir a la pag de error con un boton de volver ?
     },
 
 

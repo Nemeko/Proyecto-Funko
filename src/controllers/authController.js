@@ -30,7 +30,7 @@ module.exports = {
         console.log(`EmailValidator - ${emailValidation}\npassValidation - ${passwordValidation}`);
         req.session.isLogged = emailValidation && passwordValidation ? true : false;
 
-        /* guardar en la variable session si es admin */
+        /* nota: guardar en la variable session si es admin? */
 
         if(req.session.isLogged){
             return res.redirect('/admin/list');
@@ -67,18 +67,18 @@ module.exports = {
         delete req.body["passwordR"];                           // Eliminacion del passwordR (comprobacion)
 
         const userInfo = req.body;
-        const valores = Object.values(req.body).indexOf("");    // Comprobacion de algun espacion en blanco
+        const comprovacionValores = Object.values(req.body).indexOf("");    // Comprobacion de algun espacion en blanco
         // console.log(`Hay algun campo vacio? (-1 = false) -> (${valores})`);
         // console.log(`\n\n userInfo -> `,userInfo,`\n\n valores -> ${valores}`);
 
-        if(valores != -1){
+        if(comprovacionValores != -1){
             const mensaje = 'Falta completar algun valor o no cumple con los requisitos';
             return res.render('./auth/register' , {mensaje});
         }
 
         try{
             await services.userCreate(userInfo);
-            res.send('Controller -> adminRegister\n');
+            res.send('Controller -> adminRegister\n');  // Revisar esto que no me cuadra !!!!!
         }catch(err){
             const {sqlMessage} = err.e;                                         // Recuperacion del mensaje de error del SQL
             const isEmailDuplicate = sqlMessage.includes("user_unique_email");  // True si el correo esta duplicado

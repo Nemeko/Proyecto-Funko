@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const methodOverride = require('method-override');
 const { initSession } = require('./src/utils/sessions.js');
 const { logged } = require('./src/utils/logged.js');
 require('dotenv').config();

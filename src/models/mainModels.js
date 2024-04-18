@@ -41,10 +41,7 @@ module.exports = {
     },
     getAllItems : async ()=> {
       try{
-        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id');
         const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id');
-        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id ORDER BY rand() LIMIT 2');
-        
         return rows;
       }catch(err){
         error.load(err)
@@ -69,7 +66,6 @@ module.exports = {
     getSearchAdmin : async (params)=>{
       try{
         const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
-        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE ');
         return rows;
       }catch(err){
         error.load(err)
@@ -128,9 +124,8 @@ module.exports = {
 
 
     /* Buscar */
-    getSearch : async (sql, params)=>{ // params es un array que debe conincidir con los ? para que no de error 
+    getSearch : async (sql, params)=>{
       try{
-        // const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
         console.log(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE`+sql);
         const [rows] = await db.query(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE `+sql, params);
         return rows;
@@ -171,9 +166,7 @@ module.exports = {
     },
     dbCabeceras : async (table)=>{
       try{
-        // const [rows] = await db.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?`, [table]);
         const [rows] = await db.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'Funkodb' AND table_name = ?`, [table]);
-        
         return rows;
       }catch(err){
         return error.Cabeceras(err);

@@ -1,8 +1,4 @@
-/* En este controller va la logica de 'Items' y las llamadas a BBDD*/
-
-const { getAllItemsByLicence } = require('../models/mainModels');
 const services = require('../services/adminServices');
-
 
 module.exports = {
    
@@ -25,15 +21,5 @@ module.exports = {
         const item = await services.itemGetOne(id);
         const cards = await services.itemGetByLicence(item.licence_id);
         res.render('./shop/item', {item, cards, headerMenu});
-        // res.send("Carga de 1 Item, falta desarrollar");
-    },
-
-    search : async(req, res) => {
-        
-        // const cards = await services.itemGetByLicence(item.licence_id);
-        // renderizar la propia pagina de
-        // res.render('./shop/item', {item, cards});
-        // res.send("Carga de 1 Item, falta desarrollar");
     }
-
 }

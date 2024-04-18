@@ -1,4 +1,3 @@
-/* Este archivo de rutas utiliza el archivo de controllers */
 
 const express = require('express');
 const router = express.Router();

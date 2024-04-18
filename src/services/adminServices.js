@@ -1,4 +1,4 @@
-/* capa servicios para antes de la conulta de modeles a la BBDD */
+/* capa servicios para antes de la conulta de model a la BBDD */
 const db = require('../models/mainModels');
 
 const schema = async(params, table) => {
@@ -23,10 +23,8 @@ const schema = async(params, table) => {
 module.exports = {
     /* Crear */
     itemCreate: async(params) => {
-                
         const itemSchema = await schema(params, "product"); 
         itemSchema.discount == "" ? itemSchema.discount = 0:"";
-        console.log(`* cabeceras => ${itemSchema}\n\n`);
         return await db.insertItem(itemSchema);
     },
 
@@ -55,7 +53,6 @@ module.exports = {
     
     /* Buscar */
     seachAdmin: async (params) => {
-        console.log("- Servicios -> search'")
         const sql = 'product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?';
         params = [params, params, params];
         return await db.getSearch(sql, params);
@@ -63,10 +60,8 @@ module.exports = {
 
     /* Editar */
     itemEdit : async (params, id) => {
-        console.log('- Servicios -> itemEdit');
         const itemSchema = await schema(params, "product");      // esta logica va para itemCreate ya que para el edit solo se necesita el Objeto
         return await db.updateItem(itemSchema, id);
-
     },
 
     /* Delete */
@@ -83,7 +78,6 @@ module.exports = {
     /* users */
     userCreate: async(params) => {
         const userSchema = await schema(params, "user"); 
-        console.log(`* cabeceras => ${userSchema}\n\n`);
         return await db.insertUser(userSchema);
     },
     userCheck: async(params) => {

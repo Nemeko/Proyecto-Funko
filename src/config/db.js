@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-const { connect } = require('../routes/adminRutes');
+
 require('dotenv').config();
 
 const pool = mysql.createPool({       // Creamos un pool de conexion con la conf de la BBDD
