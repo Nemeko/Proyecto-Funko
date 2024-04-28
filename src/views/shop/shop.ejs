@@ -1,49 +1,53 @@
 <%- include('../partials/header')%>
     <main class="container-pagina container_tienda">
         <aside class="container_aside">
-            <div class="filter_buscador">
-                <h2 class="filter_titulo" >BUSCAR</h2>
-                <input class="buscador_input filter_buscador_size" type="text" placeholder="item o categoria">
-            </div>
-            <div class="filter_buscador">
-                <h2 class="filter_titulo" >ORDENAR POR</h2>
-                <select  name="" id="">
-                    <option value="">Mayor a Menor</option>
-                    <option value="">Menor a Mayor</option>
-                </select>
-            </div>
-            <div class="filter_buscador" >
-                <h2 class="filter_titulo" >PRECIO</h2>
-                <div class="filter_precio">
-                    <label for="precio_min">MIN</label>
-                    <input class="size_precio" type="text" name="" id="precio_min" placeholder="0.0">
-                    <p>-</p>
-                    <label for="precio_max">MAX</label>
-                    <input class="size_precio" type="text" name="" id="precio_max" placeholder="0.0">
+            <!-- <form action="/shop/search" method="POST" class="formulario" enctype="application/x-www-form-urlencoded"> -->
+                <div class="filter_buscador">
+                    <h2 class="filter_titulo" >BUSCAR</h2>
+                    <input class="buscador_input filter_buscador_size" type="text" name="valorBuscado" placeholder="item o categoria">
                 </div>
-            </div>
-            <div class="filter_buscador">
-                <h2 class="filter_titulo" >FILTRAR</h2>
-                <div>
-                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_nuevos"></input>
-                    <label for="filtro_nuevos">NUEVOS</label>
+                <div class="filter_buscador">
+                    <h2 class="filter_titulo" >ORDENAR POR</h2>
+                    <select  class="opciones" name="opciones">
+                        <option value="1">Nombre: A-Z</option>
+                        <option value="2">Nombre: Z-A</option>
+                        <option value="3">Precio: Min - Max</option>
+                        <option value="4">Precio: Max - Mix</option>
+                    </select>
                 </div>
-                <div>
-                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_ofertas"></input>
-                    <label for="filtro_ofertas">OFERTAS</label>
+                <div class="filter_buscador" >
+                    <h2 class="filter_titulo" >PRECIO</h2>
+                    <div class="filter_precio">
+                        <label for="precio_min">MIN</label>
+                        <input class="size_precio precioMin" type="text" name="min" id="precio_min" placeholder="0.0">
+                        <p>-</p>
+                        <label for="precio_max">MAX</label>
+                        <input class="size_precio precioMax" type="text" name="max" id="precio_max" placeholder="0.0">
+                    </div>
                 </div>
-                <div>
-                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_edicionEspecial"></input>
-                    <label for="filtro_edicionEspecial">EDICION ESPECIAL</label>
+                <div class="filter_buscador">
+                    <h2 class="filter_titulo" >FILTRAR</h2>
+                    <div>
+                        <input class="filter_checkBox" type="checkbox" name="nuevos" id="filtro_nuevos"></input>
+                        <label for="filtro_nuevos">NUEVOS</label>
+                    </div>
+                    <div>
+                        <input class="filter_checkBox" type="checkbox" name="ofertas" id="filtro_ofertas"></input>
+                        <label for="filtro_ofertas">OFERTAS</label>
+                    </div>
+                    <div>
+                        <input class="filter_checkBox" type="checkbox" name="especial" id="filtro_edicionEspecial"></input>
+                        <label for="filtro_edicionEspecial">EDICION ESPECIAL</label>
+                    </div>
+                    <div>
+                        <input class="filter_checkBox" type="checkbox" name="favoritos" id="filtro_favoritos"></input>
+                        <label for="filtro_favoritos">FAVORITOS</label>
+                    </div>
                 </div>
-                <div>
-                    <input class="filter_checkBox" type="checkbox" name="" id="filtro_favoritos"></input>
-                    <label for="filtro_favoritos">FAVORITOS</label>
-                </div>
-            </div>
+            <!-- </form> -->
         </aside> 
         <section>
-            <ul class="item_container">
+            <ul class="item_container cards_ul_shop">
                 <% items.forEach( item => { %>
                 <li class="item_container_card">
                     <a class="item_container_card_link" href="/shop/item/<%= item.product_id %>">
@@ -63,4 +67,5 @@
             <!-- fin de iteraccion -->
         </section>
     </main>
+    <script src="/js/buscadorShop.js"></script>
 <%- include('../partials/footer')%>

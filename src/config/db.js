@@ -1,5 +1,4 @@
 const mysql = require('mysql2');
-
 require('dotenv').config();
 
 const pool = mysql.createPool({       // Creamos un pool de conexion con la conf de la BBDD
@@ -19,7 +18,7 @@ pool.getConnection((error, connection)=>{
             connection.release();
         }else{
             console.log("- Hubo un error en la conexion a la BBDD:\n",error);
-            console.log("\n- Es necesario reiniciar la ejecucion manualmente")
+            console.log("\n- Es necesario reiniciar la ejecucion manualmente"); // Esto es para pruenas durante el localhost
         }
     });
 

@@ -123,7 +123,8 @@ module.exports = {
             const { search } = req.query
             console.log(`Search: ${search}`);
             // items = await services.itemSearchAdmin(`%${search}%`);
-            items = await services.seachAdmin(`%${search}%`);
+            items = await services.searchAdmin(`%${search}%`);
+            console.log(items);
             res.send(items)
         }catch(err){
             res.status(500).render('./error',{err})

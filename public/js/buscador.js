@@ -72,29 +72,6 @@ return (`<li class="list_item">
                 </form>
             </div>
         </li>`)
-
-
-// return (`<li class="list_item">
-//             <p class="list_id">${product_id}</p>
-//             <p class="list_codigo">${sku}</p>
-//             <p class="list_nombre">${product_name}</p>
-//             <p class="list_categoria">${category_name}</p> 
-//             <div class="list_div_icono">          
-//                 <a href="/admin/edit/${product_id}">
-//                     <svg class="icono icono_lapiz" role="img">  
-//                         <use xlink:href="/icons/icons.svg#pencil" alt="lapiz"></use>     
-//                     </svg>
-//                 </a>
-//                 <form action="/admin/delete/${product_id}" method="POST"> 
-//                     <button input class="boton-delete" type="submit">
-//                         <svg class="icono icono_papelera" role="img">
-//                             <use xlink:href="/icons/icons.svg#trash" alt="papelera"></use>
-//                         </svg>
-//                     </button>
-//                 </form>
-//             </div>
-//         </li>`)
-
 }
 
 

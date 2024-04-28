@@ -51,18 +51,6 @@ label,
     font-size: 1.8em;
 }
 
-
-
-
-.filter_buscador{
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    margin-top: var(--spacing-28);
-}
-
-
-
 .old_item_precio{                       /* se utiliza en items */
     margin: var(--spacing-16) 0px;
     font-size: var(--font-size-l);
@@ -234,34 +222,6 @@ textarea{
     /* border: 2px solid white; */
 }
 
-.filter_checkBox{               /* checkBox*/
-    width: 20px;
-    height: 20px;
-    margin: 0.7rem var(--spacing-12);
-}
-
-.filter_precio{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.filter_precio p,
-.filter_precio input,
-.filter_precio label{
-    margin: 1rem 0px;
-}
-
-.filter_precio input{
-    text-align: center;
-    /* border: 3px solid var(--dark-bg-1); */
-    border: none;
-    background-color: var(--dark-bg-1);
-    border-radius: 10px;
-    width: 5rem;
-
-}
 
 /* titulo lista de productos */
 
@@ -509,3 +469,5 @@ input:valid + span:after {
     font-weight: 800;
     /* text-shadow: 0px 0px 5px yellowgreen; */
 }
+
+

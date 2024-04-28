@@ -21,7 +21,6 @@ module.exports = {
         error.load(err)
         throw(error);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -35,19 +34,17 @@ module.exports = {
       }catch(err){
         // res.status(500).render('./error',error(err));
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
-    getAllItems : async ()=> {
+    getAllItems : async (sql=" ORDER BY product_name")=> {
       try{
-        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id');
+        const [rows] = await db.query(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id`+sql);
         return rows;
       }catch(err){
         error.load(err)
         throw(error);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -59,22 +56,10 @@ module.exports = {
         error.load(err)
         throw(error);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
-    getSearchAdmin : async (params)=>{
-      try{
-        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?',[params,params,params]);
-        return rows;
-      }catch(err){
-        error.load(err)
-        throw(error);
-      }finally{
-        console.log("Liberando conexion de la BBDD");
-        db.releaseConnection();
-      }
-    },
+    
     getAllLicence : async() => {
       try{   
         const [rows] = await db.query('SELECT * FROM licence');
@@ -83,7 +68,6 @@ module.exports = {
         // error.Obtener(err);
         return error;
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -95,7 +79,6 @@ module.exports = {
         // error.Obtener(err);
         return error;
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -106,7 +89,6 @@ module.exports = {
       }catch(err){
         // return error.Obtener(err);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -117,23 +99,35 @@ module.exports = {
       }catch(err){
         // return error.Obtener(err);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
 
 
     /* Buscar */
+    getSearchAdmin : async (params)=>{
+      try{
+        console.log("dentro del sql: ", params);
+        const [rows] = await db.query('SELECT * FROM product JOIN category ON product.category_id=category.category_id WHERE product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?', params);
+        console.log("rows ",rows);
+        return rows;
+      }catch(err){
+        console.log(err);
+        error.load(err)
+        throw(error);
+      }finally{
+        db.releaseConnection();
+      }
+    },
     getSearch : async (sql, params)=>{
       try{
-        console.log(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE`+sql);
-        const [rows] = await db.query(`SELECT * FROM product JOIN category ON product.category_id=category.category_id JOIN licence ON product.licence_id=licence.licence_id WHERE `+sql, params);
+        const [rows] = await db.query(`SELECT * FROM product JOIN licence ON product.licence_id=licence.licence_id WHERE `+sql, params);
+        // const [rows] = await db.query("SELECT * FROM product JOIN licence ON product.licence_id=licence.licence_id WHERE product_name LIKE '%harr%' OR licence_name LIKE '%harr%' AND price <= 200 ORDER BY product_name")
         return rows;
       }catch(err){
         error.load(err)
         throw(error);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -142,13 +136,11 @@ module.exports = {
     /* Editar */
     updateItem : async(params, id) => {
       try{
-      console.log(`SQL ====>  UPDATE product SET ${params} WHERE product_id = ${id}`);
       const [rows] = await db.query('UPDATE product SET ? WHERE product_id = ?',[params, id]);
       return rows
       }catch(err){
         return error.Modificar(err);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -187,7 +179,6 @@ module.exports = {
         error.load(err);
         throw(error);
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },
@@ -200,7 +191,6 @@ module.exports = {
         console.log(err);
         res.status(500).render('./error',error(err));
       }finally{
-        console.log("Liberando conexion de la BBDD");
         db.releaseConnection();
       }
     },

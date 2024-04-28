@@ -21,5 +21,23 @@ module.exports = {
         const item = await services.itemGetOne(id);
         const cards = await services.itemGetByLicence(item.licence_id);
         res.render('./shop/item', {item, cards, headerMenu});
+    },
+
+    serchItem : async(req, res) => {
+       
+        const search = req.body.valorBuscado;
+        const order = req.body.valorOpciones;
+        const min = req.body.valorPrecioMin;
+        const max = req.body.valorPrecioMax;
+
+        console.log(req.body);
+        try{
+        const items = await services.searchItem(search, order, min, max);
+        res.send(items);
+        }catch(err){
+            console.log(err);
+            res.status(500).render('./error',{err})
+        }
+
     }
 }

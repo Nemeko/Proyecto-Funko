@@ -52,9 +52,80 @@ module.exports = {
     },    
     
     /* Buscar */
-    seachAdmin: async (params) => {
-        const sql = 'product_name LIKE ? OR sku LIKE ? OR category_name LIKE ?';
+    searchAdmin: async (params) => {
+        try{
         params = [params, params, params];
+        console.log("dentro del searchAdmin: ", params);
+        return await db.getSearchAdmin(params);
+        }catch(err){
+            console.log(err);
+            throw(err);
+        }
+    },
+
+    searchItem: async (search="", order=1, min=false, max=false, fNew=false, fOfert=false, fSpecial=false, fFavorites=false) =>{
+        // funcion busqueda(valor de busqueda,precio min, precio max, nuevo, oferta, edicion especial, favoritos, mayor o menor)
+        // (search, order, min, max, new, ofert, special, favorites)
+        // valor buscado => product_name LIKE ? OR category_name LIKE ? OR licence_name LIKE ?   ('%star%')
+        // precio min => price >= 99 
+        // precio max => price <= 2000
+        // order by (nombre - may o men, precio - may o men) [0 = false, 1 = nombre A - Z, 2 = nombre Z - A, 3 = precio Min - Max, 4 = precio Max - Min] 
+        // order by desc
+        let sql = "";
+        let sqlAND = "";
+        let params = [];
+        
+        console.log(``)
+
+        if (search != ""){
+            sql = 'product_name LIKE ? OR licence_name LIKE ?';
+            sqlAND = ' AND ';
+            params = [`%${search}%`, `%${search}%`];   
+        }
+
+        min = parseInt(min);
+        max = parseInt(max);
+        
+
+        if(min){
+            sql += sqlAND;
+            sql += 'price >= ?';
+            sqlAND = ' AND ';
+            params.push(min);
+        }
+
+        if(max){
+            sql += sqlAND;
+            sql += 'price <= ?';
+            sqlAND = ' AND ';
+            params.push(max);
+        }
+
+        /* Logicas
+            fNews
+            fOfert
+            fSpecial
+            fFavorites
+        */
+        order = parseInt(order);
+        switch (order){
+            case 0: break;
+            case 1: sql+= ' ORDER BY product_name';
+            break;
+            case 2: sql+= ' ORDER BY product_name DESC';
+            break;
+            case 3: sql+= ' ORDER BY price';
+            break;
+            case 4: sql+= ' ORDER BY price DESC';
+            break;
+        }
+
+        console.log("sql => ", sql);
+        console.log(params);
+        
+        if(sqlAND == ""){   // control por si unicamente se modifica el orden de los items
+            return await db.getAllItems(sql);
+        }
         return await db.getSearch(sql, params);
     },
 
