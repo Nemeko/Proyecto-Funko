@@ -1,0 +1,64 @@
+<%- include('../partials/header')%>
+<main class="container-pagina">
+    <h1 class="item_list_carrito-titulo">CARRITO DE COMPRAS</h1>
+    <section >
+        <div class="item_list_carrito-cabeceras">
+            <p class="item_list_carrito_cbProducto">DETALLE DE PRODUCTO</p>
+            <p class="item_list_carrito_cbCantidad">CANTIDAD</p>
+            <p class="item_list_carrito_cbTotal">TOTAL</p>
+        </div>
+        <ul class="items_carrito">
+            <% items.forEach( item => { %>
+            <li class="item_list_carrito" id="<%= item.product_id %>">
+                <img src="<%= item.image_front %>" alt="imagen" class="border imagen-test">
+                <div class="border item_list_carrito_info">
+                    <h1 class="item_list_carrito_info-titulo"><%= item.product_name %></h1>
+                    <p class="item_list_carrito_info-licencia"><%= item.licence_name %></p>
+                    <p class="item_list_carrito_info-precio"><span>$ </span><span id="precio_unitario<%= item.product_id %>"><%= item.price %></span></p>
+                </div>
+                <div class="item_list_carrito_cantidad">
+                    <input class="item_input_carrito item_input"  id="cantidad<%= item.product_id %>" type="text" placeholder="0" value="<%= item.cantidad %>">
+                    <div class="botones_carrito">
+                        <button class="boton-item-carrito boton-mas" id="<%= item.product_id %>" >+</button>
+                        <button class="boton-item-carrito boton-menos" id="<%= item.product_id %>" >-</button>
+                    </div>
+                </div>
+                <h2 class="item_list_carrito_total"><span>$ </span><span class="precio_total" id="precio_total<%= item.product_id %>"><%= (item.price * item.cantidad).toFixed(2) %></span></h2>
+                <button input class="boton-delete item_list_carrito_quit" type="submit">
+                    <svg class="icono boton-delete icono_papelera" id="<%= item.product_id %>" role="img">
+                        <use xlink:href="/icons/icons.svg#trash" class="delete boton-delete" id="<%= item.product_id %>" alt="papelera"></use>
+                    </svg>
+                    <p class="hiden"><%= item.product_id %></p>     <!-- modificar para borrar mediante ID desde el boton -->
+                </button>
+            </li>
+            <% }) %>
+        </ul>
+    </section>
+    <section class="container_carrito_resum">
+        <h2 class="item_list_carrito_resumen-titulo">RESUMEN</h2>
+        <div class="item_list_carrito_resumen">
+            <div class="item_list_carrito_resumen_renglon">
+                <p>Cantidad de items</p>
+                <p class="item_list_carrito_resumen-items">0</p>
+            </div>
+            <div class="item_list_carrito_resumen_renglon">
+                <p>Subtotal</p>
+                <p class="item_list_carrito_resumen-subtotal">0</p>
+            </div>
+            <div class="item_list_carrito_resumen_renglon">
+                <p>Envio</p>
+                <p><span>$ </span><span>0.00</span></p>
+            </div>
+            <hr class="item_list_carrito_resumen_linea">
+            <div class="item_list_carrito_resumen_renglon">
+                <p>TOTAL</p>
+                <p class="item_list_carrito_resumen-total"><span>$ </span><span>0.00</span></p>
+            </div>
+        </div>
+        <button class="boton-standar item_boton-pagos" >PAGAR</button>
+    </section>
+    <script src="/js/carritoShop.js"></script>
+</main>
+
+<!-- <script src="/js/item.js"></script> -->
+<%- include('../partials/footer')%>

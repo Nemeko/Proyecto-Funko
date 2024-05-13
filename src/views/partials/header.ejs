@@ -20,7 +20,8 @@
                 <% }else{ %>
                     <div class="header_link_blue"><a href="/auth/login"> INGRESAR </a></div> <!-- o Entrar dependiendo la pag redirigr a login o a logout -->
                 <% } %>
-                <a class="" href="/">
+                <a class="header_link_cart link_carrito">
+                    <p class="baloon oculto">0</p>
                     <svg class="icono icono-cart" role="img">
                         <use xlink:href="/icons/icons.svg#cart" alt="carrito"></use>
                     </svg>
@@ -29,3 +30,4 @@
             </div>
         </nav>
     </header>
+    <script src="/js/carrito.js"></script>

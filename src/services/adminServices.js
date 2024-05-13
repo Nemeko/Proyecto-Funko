@@ -55,7 +55,6 @@ module.exports = {
     searchAdmin: async (params) => {
         try{
         params = [params, params, params];
-        console.log("dentro del searchAdmin: ", params);
         return await db.getSearchAdmin(params);
         }catch(err){
             console.log(err);
@@ -64,19 +63,10 @@ module.exports = {
     },
 
     searchItem: async (search="", order=1, min=false, max=false, fNew=false, fOfert=false, fSpecial=false, fFavorites=false) =>{
-        // funcion busqueda(valor de busqueda,precio min, precio max, nuevo, oferta, edicion especial, favoritos, mayor o menor)
-        // (search, order, min, max, new, ofert, special, favorites)
-        // valor buscado => product_name LIKE ? OR category_name LIKE ? OR licence_name LIKE ?   ('%star%')
-        // precio min => price >= 99 
-        // precio max => price <= 2000
-        // order by (nombre - may o men, precio - may o men) [0 = false, 1 = nombre A - Z, 2 = nombre Z - A, 3 = precio Min - Max, 4 = precio Max - Min] 
-        // order by desc
         let sql = "";
         let sqlAND = "";
         let params = [];
         
-        console.log(``)
-
         if (search != ""){
             sql = 'product_name LIKE ? OR licence_name LIKE ?';
             sqlAND = ' AND ';
@@ -120,8 +110,6 @@ module.exports = {
             break;
         }
 
-        console.log("sql => ", sql);
-        console.log(params);
         
         if(sqlAND == ""){   // control por si unicamente se modifica el orden de los items
             return await db.getAllItems(sql);

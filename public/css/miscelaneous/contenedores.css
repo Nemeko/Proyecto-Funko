@@ -139,8 +139,6 @@
 }
 
 .container_contenido h5{
-    /* font-size: var(--font-size-xxs); */
-    /* background-color: #004830; */
     font-weight: 300;
     margin: var(--spacing-12) 0px;
 }
@@ -155,3 +153,9 @@
     font-size: var(--font-size-xl);
 }
 
+.container_carrito_resum{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+}

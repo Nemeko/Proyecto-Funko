@@ -11,13 +11,16 @@ const encryptar = (password) => {
 module.exports = {   
     /* Login */
     userLoginLoad : async (req, res) => {
+        // console.log("testing cookies");
+        // const cokkie = req.session;
+        // console.log("cookie = ", cokkie);  
         res.render('./auth/login');
     },
 
     userLogin : async (req, res) => {
         const { email, password } = req.body;
         const user = await services.userCheck(email);
-        console.log(`User = ${user}`);
+        // console.log(`User = ${user}`);
 
         if(!user){
             return res.status(401).send("Credenciales invalidas"); 
@@ -27,7 +30,7 @@ module.exports = {
         const emailValidation = email == user.email;                            
         const passwordValidation = bcrypt.compareSync(password, user.password);
 
-        console.log(`EmailValidator - ${emailValidation}\npassValidation - ${passwordValidation}`);
+        // console.log(`EmailValidator - ${emailValidation}\npassValidation - ${passwordValidation}`);
         req.session.isLogged = emailValidation && passwordValidation ? true : false;
 
         /* nota: guardar en la variable session si es admin? */

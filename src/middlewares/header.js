@@ -24,5 +24,15 @@ module.exports = {
             url : "/admin/list"
         }];
         next()
+    },
+    item : (req, res, next) => {
+        req.headerMenu = [{
+            menu : "SHOP",
+            url : "/shop"
+        },{
+            menu : "ADMIN",
+            url : "/admin/list"
+        }];
+        next()
     }
 }

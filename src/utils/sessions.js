@@ -1,16 +1,29 @@
+/* Utilizando express-session */
+// const session = require('express-session');
+// require('dotenv').config();
 
-const session = require('express-session');
+// module.exports = {
+//     initSession : () => {
+//         return session({
+//             secret: process.env.SESSION_NAME,
+//             resave: false,
+//             saveUnitialized: true
+//         })
+//     }
+// }
+
+/* Utilizando cookie-sessions (config para poder utilizarlo en el server gratuito)*/
+const session = require('cookie-session');
 require('dotenv').config();
 
 module.exports = {
     initSession : () => {
         return session({
-            secret: process.env.SESSION_NAME,
-            resave: false,
-            saveUnitialized: true
+            secret: process.env.SESSION_NAME
         })
     }
 }
+
 
 /* variables de conf que recibe express-session
 - resave: Indica si se deve volver a guardar la sesion en el almacen de sessiones aunque no haya habido cambios en la session durante la solicitud

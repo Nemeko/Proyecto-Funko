@@ -17,7 +17,8 @@
     font-size: var(--font-size-xx);
 }
 
-.boton-item{
+.boton-item,
+.boton-item-carrito{
     font-size: var(--font-size-m);
     font-weight: bold;
     width: 32px;
@@ -28,6 +29,13 @@
     color: var(--ligh-1);
 }
 
+.boton-item-carrito{
+    font-size: var(--font-size-s);
+    width: 23px;
+    height: auto;
+}
+
+.boton-item-carrito:hover,
 .boton-standar:hover,
 .boton-redondo:hover,
 .boton-item:hover{
@@ -75,5 +83,5 @@
 .boton-delete{
     background-color: transparent;
     border: none;
-    width: fit-content;
+    height: fit-content;
 }

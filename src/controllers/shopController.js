@@ -23,14 +23,26 @@ module.exports = {
         res.render('./shop/item', {item, cards, headerMenu});
     },
 
+    takeCarritoInfo : async(req, res) => {
+        const headerMenu = req.headerMenu;
+        let {data} = req.body;
+        data = JSON.parse(data) ?? {};  // Envio un objeto vacio para hacer el render de la pag igualmente
+
+        const id = Object.keys(data);
+        const items = await Promise.all(id.map(async item => {
+            let buffer = await services.itemGetOne(item);
+            buffer.cantidad = data[item];
+            return buffer;
+        }));
+        res.render('./shop/carrito', {items, headerMenu});
+    },
+
     serchItem : async(req, res) => {
-       
         const search = req.body.valorBuscado;
         const order = req.body.valorOpciones;
         const min = req.body.valorPrecioMin;
         const max = req.body.valorPrecioMax;
 
-        console.log(req.body);
         try{
         const items = await services.searchItem(search, order, min, max);
         res.send(items);
